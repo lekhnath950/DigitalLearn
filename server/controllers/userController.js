@@ -1,4 +1,5 @@
 import { createError } from "../error.js"
+import Post from "../models/Post.js"
 // import userModel from "../models/userModel"
 // import {User} from "../models/userModel"
 import User from "../models/User.js"
@@ -76,15 +77,31 @@ export const unsubscribe = async (req,res, next) => {
 }
 
 export const like = async (req,res, next) => {
+    const id = req.user.id
+    const postId = req.params.postId
     try {
-        
+        await Post.findByIdAndUpdate(postId,{
+            $addToSet:{likes:id},
+            $pull:{dislikes:id}
+        })
+
+        res.status(200).json("Post Liked")
+
     } catch (err) {
         next(err)
     }
 }
 
 export const dislike = async (req,res, next) => {
+    const id = req.user.id
+    const postId = req.params.postId
     try {
+        await Post.findByIdAndUpdate(postId,{
+            $addToSet:{dislikes:id},
+            $pull:{likes:id}
+        })
+
+        res.status(200).json("Post disLiked")
         
     } catch (err) {
         next(err)
