@@ -122,9 +122,10 @@ export const getByTag = async (req,res,next) => {
 }
 
 export const search = async (req,res,next) => {
+    const query = req.query.q
     try {
 
-        const post = await Post.find().sort({views:-1})
+        const post = await Post.find({title: {$regex: query, $options: "i"}}).limit(2).sort({views:-1})
         res.status(200).json(post)
         
     } catch (err) {
