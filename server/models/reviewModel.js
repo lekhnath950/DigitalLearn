@@ -12,5 +12,13 @@ const ReviewSchema = new mongoose.Schema({
     desc: {
         type: String,
         required: true,
-    }
-})
+    },
+
+},
+
+{
+timestamps: true,
+}
+)
+
+export default mongoose.model("Review", ReviewSchema)

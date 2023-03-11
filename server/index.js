@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 import userRoute from './routes/userRoute.js'
 import postRoute from './routes/postRoute.js'
 import authRoute from './routes/authRoute.js'
-// import ReviewRoute from './routes/reviewRoute.js'
+import reviewRoute from './routes/reviewRoute.js'
 import cookieParser from "cookie-parser"
 
 const app = express()
@@ -22,7 +22,7 @@ app.use(cookieParser())
 app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
 app.use("/api/posts", postRoute)
-// app.use("/api/review", reviewRoute)
+app.use("/api/review", reviewRoute)
 
 app.use((err,req,res,next) => {
     const status = err.status || 500;
