@@ -1,6 +1,7 @@
 import React from 'react'
 import './Navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
+import { Button } from '@mui/material';
 
 function Navbar() {
   return (
@@ -12,6 +13,15 @@ function Navbar() {
         <div className='Navbar-search'>
             <input type="text" placeholder="Search" className="searchbar" />
             <SearchIcon/>
+        </div>
+
+        <div className='auth'>
+          <div>
+            <Button variant='outlined' >Login</Button>
+          </div>
+          <div>
+            <Button variant='outlined' >Sign Up</Button>
+          </div>
         </div>
 
 

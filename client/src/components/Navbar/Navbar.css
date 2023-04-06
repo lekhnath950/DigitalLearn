@@ -1,7 +1,8 @@
 .Navbar-main{
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
+    justify-content: space-between;
+    padding: 1px 10px;
 }
 
 .Navbar-search{
@@ -19,6 +20,12 @@
     border: 0px;
     outline: none;
 }
+
+.auth{
+    display: flex;
+    gap: 10px;
+}
+
 
 .leftnav{
     background-color: rgb(243, 211, 211);
