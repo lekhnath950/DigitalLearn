@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from '../Navbar/Navbar'
+import Post from '../../Cards/Post/Post'
 
 const Home = () => {
   return (
     <div>
 
-    <Navbar/>
+    <Post/> 
 
     </div>
   )

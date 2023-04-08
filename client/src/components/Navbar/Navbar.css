@@ -10,7 +10,7 @@
     align-items: center;
     margin-left: 100px;
     border: 1px solid grey;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 5px 10px;
 }
 
@@ -35,4 +35,23 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+
+.menu-main{
+    background-color: rgb(206, 206, 250);
+    width: 200px;
+}
+
+.menus{
+    /* border: 1px solid grey; */
+    box-shadow: 1px 1px 2px black;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    gap: 5px;
+}
+
+.menus:hover{
+    background-color: wheat;
 }
