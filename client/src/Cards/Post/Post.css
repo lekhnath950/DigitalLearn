@@ -1,3 +1,8 @@
+.post{
+    border: 1px solid grey;
+    max-width: max-content;
+}
+
 .thumbimg{
     height: 200px;
 }

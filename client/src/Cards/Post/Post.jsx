@@ -6,7 +6,7 @@ const Post = () => {
   return (
     <div>
 
-        <div>
+        <div className='post'>
             {/* <Link> */}
                 <div className='container'>
                     <div className='thumbnail'>

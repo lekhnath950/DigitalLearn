@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import axios from 'axios'
 
 function Navbar() {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+
+    try {
+      const res = await axios.post("auth/login", {email,password})
+      console.log(res.data)
+    } catch (error) {
+      
+    }
+  }
+
   const [dialog, setDialog] = React.useState(false)
 
   const Dialogbox = () => {
@@ -39,10 +55,10 @@ function Navbar() {
   </DialogActions>
   <DialogTitle>Login</DialogTitle>
   <DialogContent>
-          <form>
-            <input type='email' placeholder='Email' />
-            <input type='password' placeholder='Password' />
-            <Button variant='outlined' >Login</Button>
+          <form >
+            <input type='email' placeholder='Email' onChange={(e)=> setEmail(e.target.value)} />
+            <input type='password' placeholder='Password' onChange={(e)=> setPassword(e.target.value)} />
+            <Button variant='outlined' onClick={handleLogin} >Login</Button>
           </form>
   </DialogContent>
 </Dialog>
