@@ -11,14 +11,14 @@ const Home = () => {
       setPost(res.data)
     }
 
-    fetchh()
-  })
+    fetchh() ;
+  }, [])
 
   return (
     <div>
 
       {post.map((posts)=> (
-        <Post/> 
+        <Post key={post._id} post={posts}/> 
 
       ))}
 
