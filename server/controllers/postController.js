@@ -6,15 +6,15 @@ export const test = (req,res) => {
     res.json("Hi there")
 }
 
-export const addPost = async (req,res,next) => {
-    const newVideo = new Post({userId: req.user.id, ...req.body})
+export const addPost = async (req, res, next) => {
+    const newVideo = new Post({ userId: req.user.id, ...req.body });
     try {
-        const savedVideo = newVideo.save()
-        res.status(200).json(savedVideo)
+      const savedVideo = await newVideo.save();
+      res.status(200).json(savedVideo);
     } catch (err) {
-        next(err)
+      next(err);
     }
-}
+  };
 
 export const updatePost = async (req,res,next) => {
     try {

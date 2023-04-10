@@ -25,6 +25,8 @@ const Post = ({post}) => {
                         <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
                     </div>
 
+                    
+
                     <div className='userpp'>
                         <img src={channel.img} alt='pp' className='profilepic' />
                     </div>
