@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-// import {Link} from "react-router-dom"
+import {Link} from "react-router-dom"
 import "./Post.css"
 import axios from 'axios'
+import moment from 'moment'
 
-const Post = ({post}) => {
+const Post = ({ post }) => {
 
     const [channel, setChannel] = React.useState({})
 
@@ -12,35 +13,38 @@ const Post = ({post}) => {
             const res = await axios.get(`/users/find/${post.userId}`)
             setChannel(res.data)
         }
-        fetchChannel() 
-    }, []) 
-  return (
-    <div>
+        fetchChannel()
+    }, [])
+    return (
+        <div>
+{/* <Link to={`/posts/${post._id}`} > */}
 
-            {/* <Link to={`/post/${post._id}`}> */}
-            {/* <Link to={``}> */}
-        <div className='post'>
+            <div className='post'>
                 <div className='container'>
-                    <div className='thumbnail'>
+                    {/* <div className='thumbnail'>
                         <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
+                    </div> */}
+
+                    <div>
+                        <video width="320" height="240" controls>
+                            <source src={post.videoUrl} type="video/mp4"/>
+                        </video>
                     </div>
 
-                    
-
-                    <div className='userpp'>
+                    {/* <div className='userpp'>
                         <img src={channel.img} alt='pp' className='profilepic' />
-                    </div>
+                    </div> */}
                     <div>
                         <h3>{post.title}</h3>
-                        <h5>{post.desc}</h5>
-                        <h5>{post.likes.length} </h5>
-                        <h5>{post.createdAt} </h5>
+                        <p>{post.desc}</p>
+                        <h5>{post.likes.length} Likes </h5>
+                        <h5>{moment(post.createdAt).fromNow()} </h5>
                     </div>
                 </div>
-        </div>
+            </div>
             {/* </Link> */}
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Post

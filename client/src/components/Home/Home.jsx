@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import Post from '../../Cards/Post/Post'
 import axios from 'axios'
+import Navbar from '../Navbar/Navbar'
+import LeftNav from '../Navbar/LeftNav'
+import './Home.css'
 
 const Home = () => {
   const [post, setPost] = React.useState([])
@@ -16,11 +19,18 @@ const Home = () => {
 
   return (
     <div>
+      <Navbar/>
+
+      
+      <div className='home'>
+        <LeftNav/>
 
       {post.map((posts)=> (
         <Post key={post._id} post={posts}/> 
 
       ))}
+
+</div>
 
 
     </div>

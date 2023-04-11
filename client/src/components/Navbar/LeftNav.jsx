@@ -7,7 +7,7 @@ import axios from 'axios';
 // import { useNavigate } from "react-router-dom";
 
 
-const Menu = () => {
+const LeftNav = () => {
 
     const [dialog, setDialog] = useState(false)
     const [vid, setVid] = useState(undefined)
@@ -153,4 +153,4 @@ const Menu = () => {
     )
 }
 
-export default Menu
+export default LeftNav
