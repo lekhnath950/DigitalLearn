@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import HomeIcon from '@mui/icons-material/Home';
+import SettingIcon from '@mui/icons-material/Settings'
+import Upload from '@mui/icons-material/Upload'
+import Category from '@mui/icons-material/Category'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from '../../firebase';
@@ -9,7 +12,7 @@ import axios from 'axios';
 
 const LeftNav = () => {
 
-     
+    
 
     const [dialog, setDialog] = useState(false)
     const [vid, setVid] = useState(undefined)
@@ -103,23 +106,23 @@ const LeftNav = () => {
                 <h4>Home</h4>
             </div>
             <div className='menus'>
-                <HomeIcon />
+                <Category/>
                 <h4>Category</h4>
             </div>
             <div className='menus' onClick={DialogBox}>
-                <HomeIcon />
+                <Upload />
                 <h4>Upload</h4>
             </div>
-            <div className='menus'>
+            {/* <div className='menus'>
                 <HomeIcon />
                 <h4>Popular</h4>
             </div>
             <div className='menus'>
                 <HomeIcon />
                 <h4>Subscriptions</h4>
-            </div>
+            </div> */}
             <div className='menus'>
-                <HomeIcon />
+                <SettingIcon/>
                 <h4>Settings</h4>
             </div>
 
