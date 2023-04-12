@@ -1,9 +1,7 @@
-import { Menu } from '@mui/material';
 import './App.css';
 import Home from './components/Home/Home';
-// import Menu from './components/Navbar/Menu';
-// import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Video from './Cards/Video/Video';
 
 function App() {
   return (
@@ -12,6 +10,9 @@ function App() {
       <div >
       <Routes>
         <Route path='/' element={<Home />} />
+        {/* <Route path="video"> */}
+                    <Route path="/posts/find/:id" element={<Video />} />
+        {/* </Route> */}
       </Routes>
 
       </div>
