@@ -7,6 +7,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from '../../firebase';
 import axios from 'axios';
+import {useSelector} from 'react-redux'
 // import { useNavigate } from "react-router-dom";
 
 
@@ -21,6 +22,10 @@ const LeftNav = () => {
     const [vidPer, setVidPer] = useState(0)
     const [tags, setTags] = useState([])
     const [inputs, setInputs] = useState({})
+
+    const [side, setSide] = useState(false)
+    const {user} = useSelector(state=>state.user)
+
 
     const Tag = (e) => {
         setTags(e.target.value.split(","))
@@ -109,10 +114,16 @@ const LeftNav = () => {
                 <Category/>
                 <h4>Category</h4>
             </div>
+            {user? (
+
             <div className='menus' onClick={DialogBox}>
                 <Upload />
                 <h4>Upload</h4>
             </div>
+            ) : (
+                ""
+
+            )}
             {/* <div className='menus'>
                 <HomeIcon />
                 <h4>Popular</h4>
