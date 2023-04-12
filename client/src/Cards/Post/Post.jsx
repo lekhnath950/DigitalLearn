@@ -10,14 +10,14 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         const fetchChannel = async () => {
-            const res = await axios.get(`/users/find/${post.userId}`)
+            const res = await axios.get(`/posts/find/${post.userId}`)
             setChannel(res.data)
         }
         fetchChannel()
     }, [])
     return (
         <div>
-{/* <Link to={`/posts/${post._id}`} > */}
+<Link to={`/posts/find/${post._id}`} >
 
             <div className='post'>
                 <div className='container'>
@@ -42,7 +42,7 @@ const Post = ({ post }) => {
                     </div>
                 </div>
             </div>
-            {/* </Link> */}
+            </Link>
         </div>
     )
 }
