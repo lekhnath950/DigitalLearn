@@ -3,3 +3,9 @@
 
 /client/node_modules
 /server/node_modules
+/client/node_modules/@babel
+/client/node_modules/redux
+/client/node_modules/redux-persist
+/client/node_modules/regenerator-runtime
+/client/node_modules/.package-lock.json
+
