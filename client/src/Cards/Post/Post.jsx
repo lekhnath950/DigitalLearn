@@ -37,7 +37,7 @@ const Post = ({ post }) => {
                     <div>
                         <h3>{post.title}</h3>
                         <p>{post.desc}</p>
-                        <h5>{post.likes.length} Likes </h5>
+                        {/* <h5>{post.likes.length} Likes </h5> */}
                         <h5>{moment(post.createdAt).fromNow()} </h5>
                     </div>
                 </div>
