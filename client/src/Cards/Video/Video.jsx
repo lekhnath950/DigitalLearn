@@ -10,12 +10,10 @@ import LeftNav from '../../components/Navbar/LeftNav';
 const Video = () => {
 
   const { user } = useSelector((state) => state.user)
-  // const { currentPost } = useSelector((state) => state.postx)
-  const currentPost = useSelector((state) => state.postx.currentPost);
+  const { currentPost } = useSelector((state) => state.postx)
   const dispatch = useDispatch()
 
   const path = useLocation().pathname.split("/")[2]
-  // const [video,setVideo] = useState({})
   const [channel, setChannel] = useState({})
 
   useEffect(() => {
@@ -35,7 +33,7 @@ const Video = () => {
       }
     }
     fetchData()
-  }, [])  
+  }, [path,dispatch])  
 
   return (
     <div>
@@ -46,7 +44,7 @@ const Video = () => {
 
         <div>
           <video width="400px" controls>
-            <source src={currentPost && currentPost.videoUrl} type="video/mp4" />
+            <source src={currentPost && currentPost.videoUrl} type="video/mp4"  />
           </video>
 
           <h3>

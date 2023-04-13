@@ -3,7 +3,9 @@ import { Link } from "react-router-dom"
 import "./Post.css"
 import axios from 'axios'
 import moment from 'moment'
-import { Dialog, DialogContent } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Dialog, DialogActions, DialogContent } from '@mui/material'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 
 const Post = ({ post }) => {
 
@@ -12,6 +14,10 @@ const Post = ({ post }) => {
 
     const clickMe = () => {
         setOpen(true)
+    }
+
+    const handleClose =()=> {
+        setOpen(false)
     }
 
     useEffect(() => {
@@ -29,23 +35,38 @@ const Post = ({ post }) => {
 
             <div className='post'>
                 <div className='container'>
-                    <p onClick={clickMe}>Click to play Video</p>
-                    <Link to={`/posts/${post._id}`} >
+                    {/* <Link to={`/posts/${post._id}`} > */}
                         <div className='thumbnail'>
                             <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
                         </div>
-                        <Dialog open={open}>
-                            <DialogContent>
-                                <video controls width={400}>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogActions>
+                                <h6 onClick={handleClose}>X</h6>
+                            </DialogActions>
+                            <DialogContent >
+                                <h3>{post.title}</h3>
+                                <video controls width={500}>
                                     <source src={post.videoUrl} />
                                 </video>
+                                <h6>{post.desc}</h6>
                             </DialogContent>
                         </Dialog>
 
-                    </Link>
+                    {/* </Link> */}
                     <div>
+                    <p onClick={clickMe} className='play'><PlayCircleFilledWhiteIcon fontSize='large'/></p>
+
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMore/>}>
                         <h3>{post.title}</h3>
+
+                            </AccordionSummary>
+                            <AccordionDetails>
                         <p>{post.desc}</p>
+
+                            </AccordionDetails>
+                        </Accordion>
+
                         {/* <h5>{post.likes.length} Likes </h5> */}
                         <h5>{moment(post.createdAt).fromNow()} </h5>
                     </div>

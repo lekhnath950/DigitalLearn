@@ -9,12 +9,8 @@ import app from '../../firebase';
 import axios from 'axios';
 import {useSelector} from 'react-redux'
 import { Link } from 'react-router-dom';
-// import { useNavigate } from "react-router-dom";
-
 
 const LeftNav = () => {
-
-    
 
     const [dialog, setDialog] = useState(false)
     const [vid, setVid] = useState(undefined)
@@ -79,17 +75,13 @@ const LeftNav = () => {
         );
 
     }
-    // const navigate = useNavigate()
     
     useEffect(() => { 
         vid && upload(vid, "videoUrl");
-        console.log("vidUrl")
-
     }, [vid])
     
     useEffect(() => { 
         img && upload(img, "imgUrl") ;
-        console.log("imgUrl")
     }, [img])
     
     const handleUpload = async (e) => {
@@ -100,8 +92,8 @@ const LeftNav = () => {
             videoUrl: inputs.videoUrl
         }
         const res = await axios.post("/posts", data)
-        setDialog(false);
         res.status===200 && console.log(res.data)
+        setDialog(false);
         console.log("inputs")
     }
     return (

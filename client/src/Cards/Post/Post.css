@@ -13,3 +13,11 @@
     height: 40px;
     width: 40px;
 }
+
+.play{
+    margin-top: -50px;
+}
+
+.play:hover{
+    cursor: pointer;
+}
