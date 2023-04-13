@@ -1,6 +1,7 @@
 .post{
     border: 1px solid grey;
-    max-width: max-content;
+    max-width: 30vw;
+    border-radius: 10px;
 }
 
 .thumbimg{

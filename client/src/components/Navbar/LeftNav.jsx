@@ -8,6 +8,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import app from '../../firebase';
 import axios from 'axios';
 import {useSelector} from 'react-redux'
+import { Link } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom";
 
 
@@ -23,7 +24,6 @@ const LeftNav = () => {
     const [tags, setTags] = useState([])
     const [inputs, setInputs] = useState({})
 
-    const [side, setSide] = useState(false)
     const {user} = useSelector(state=>state.user)
 
 
@@ -106,10 +106,14 @@ const LeftNav = () => {
     }
     return (
         <div className='menu-main'>
+
+            <Link to="/">
+            
             <div className='menus'>
                 <HomeIcon />
                 <h4>Home</h4>
             </div>
+                </Link>
             <div className='menus'>
                 <Category/>
                 <h4>Category</h4>

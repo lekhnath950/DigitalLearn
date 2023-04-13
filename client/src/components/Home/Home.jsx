@@ -26,7 +26,7 @@ const Home = () => {
         <LeftNav/>
 
       {post.map((posts)=> (
-        <Post key={post._id} post={posts}/> 
+        <Post key={posts.title} post={posts}/> 
 
       ))}
 

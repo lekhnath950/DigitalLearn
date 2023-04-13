@@ -8,7 +8,7 @@ router.get("/test", test)
 
 router.put("/:id", verifyToken, update)
 router.delete("/:id",verifyToken, deleteUser)
-router.get("/find/:id",verifyToken, getUser)
+router.get("/find/:id", getUser)
 router.put("/sub/:id",verifyToken, subscribe)
 router.put("/unsub/:id",verifyToken, unsubscribe)
 router.put("/like/:postId",verifyToken, like )
