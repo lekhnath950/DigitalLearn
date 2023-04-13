@@ -1,12 +1,18 @@
-import React, { useEffect } from 'react'
-import {Link} from "react-router-dom"
+import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom"
 import "./Post.css"
 import axios from 'axios'
 import moment from 'moment'
+import { Dialog, DialogContent } from '@mui/material'
 
 const Post = ({ post }) => {
 
     const [channel, setChannel] = React.useState({})
+    const [open, setOpen] = useState(false)
+
+    const clickMe = () => {
+        setOpen(true)
+    }
 
     useEffect(() => {
         const fetchChannel = async () => {
@@ -14,26 +20,29 @@ const Post = ({ post }) => {
             setChannel(res.data)
         }
         fetchChannel()
-    }, [])
+    }, [post.userId])
+
+
     return (
         <div>
-<Link to={`/posts/find/${post._id}`} >
+
 
             <div className='post'>
                 <div className='container'>
-                    {/* <div className='thumbnail'>
-                        <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
-                    </div> */}
+                    <p onClick={clickMe}>Click to play Video</p>
+                    <Link to={`/posts/${post._id}`} >
+                        <div className='thumbnail'>
+                            <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
+                        </div>
+                        <Dialog open={open}>
+                            <DialogContent>
+                                <video controls width={400}>
+                                    <source src={post.videoUrl} />
+                                </video>
+                            </DialogContent>
+                        </Dialog>
 
-                    <div>
-                        <video width="320" height="240" controls>
-                            <source src={post.videoUrl} type="video/mp4"/>
-                        </video>
-                    </div>
-
-                    {/* <div className='userpp'>
-                        <img src={channel.img} alt='pp' className='profilepic' />
-                    </div> */}
+                    </Link>
                     <div>
                         <h3>{post.title}</h3>
                         <p>{post.desc}</p>
@@ -42,7 +51,6 @@ const Post = ({ post }) => {
                     </div>
                 </div>
             </div>
-            </Link>
         </div>
     )
 }
