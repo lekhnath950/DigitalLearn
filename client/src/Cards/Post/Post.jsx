@@ -49,6 +49,8 @@ const Post = ({ post }) => {
                                     <source src={post.videoUrl} />
                                 </video>
                                 <h6>{post.desc}</h6>
+                        <h5>{moment(post.updatedAt).calendar()} </h5>
+
                             </DialogContent>
                         </Dialog>
 

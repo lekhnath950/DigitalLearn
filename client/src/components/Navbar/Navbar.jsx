@@ -13,6 +13,7 @@ function Navbar() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const {user} = useSelector(state=>state.user)
+  const [dialog, setDialog] = React.useState(false)
 
   const dispatch = useDispatch()
   const handleLogin = async (e) => {
@@ -20,14 +21,13 @@ function Navbar() {
     dispatch(loginRequest())
     try {
       const res = await axios.post("auth/login", {email,password})
+      setDialog(false)
       dispatch(loginSuccess(res.data))
-      console.log(res.data)
     } catch (error) {
       dispatch(loginFailure())
     }
   }
 
-  const [dialog, setDialog] = React.useState(false)
 
   const Dialogbox = () => {
     setDialog(true)
