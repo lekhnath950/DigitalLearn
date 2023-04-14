@@ -16,7 +16,7 @@ const Post = ({ post }) => {
         setOpen(true)
     }
 
-    const handleClose =()=> {
+    const handleClose = () => {
         setOpen(false)
     }
 
@@ -36,41 +36,43 @@ const Post = ({ post }) => {
             <div className='post'>
                 <div className='container'>
                     {/* <Link to={`/posts/${post._id}`} > */}
-                        <div className='thumbnail'>
-                            <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
-                        </div>
-                        <Dialog open={open} onClose={handleClose}>
-                            <DialogActions>
-                                <h6 onClick={handleClose}>X</h6>
-                            </DialogActions>
-                            <DialogContent >
-                                <h3>{post.title}</h3>
-                                <video controls width={500}>
-                                    <source src={post.videoUrl} />
-                                </video>
-                                <h6>{post.desc}</h6>
-                        <h5>{moment(post.updatedAt).calendar()} </h5>
+                    <div className='thumbnail post-thumbnail'>
+                        <img src={post.imgUrl} alt='thumbnail' className='thumbimg' />
+                    </div>
 
-                            </DialogContent>
-                        </Dialog>
+
 
                     {/* </Link> */}
                     <div>
-                    <p onClick={clickMe} className='play'><PlayCircleFilledWhiteIcon fontSize='large'/></p>
+                        <p onClick={clickMe} className='play'><PlayCircleFilledWhiteIcon fontSize='large' /></p>
 
-                        <Accordion>
-                            <AccordionSummary expandIcon={<ExpandMore/>}>
-                        <h3>{post.title}</h3>
+                        <Accordion className="post2">
+                            <AccordionSummary className='post-title' expandIcon={<ExpandMore />}>
+                                <h3>{post.title}</h3>
 
                             </AccordionSummary>
-                            <AccordionDetails>
-                        <p>{post.desc}</p>
+                            <AccordionDetails className='post-content'>
+                                <p>{post.desc}</p>
 
                             </AccordionDetails>
                         </Accordion>
 
-                        {/* <h5>{post.likes.length} Likes </h5> */}
-                        <h5>{moment(post.createdAt).fromNow()} </h5>
+                        <p className='dialog-updated'>{moment(post.createdAt).fromNow()} </p>
+
+                        <Dialog open={open} onClose={handleClose}>
+                            <div className="dialog-title">{post.title}</div>
+                            <div className="dialog-close" onClick={handleClose}>X</div>
+                            <DialogContent>
+                                <video className="dialog-video" controls width={500}>
+                                    <source src={post.videoUrl} />
+                                </video>
+                                <div className="dialog-desc">{post.desc}</div>
+                                <div className="dialog-updated">{moment(post.updatedAt).calendar()}</div>
+                            </DialogContent>
+                        </Dialog>
+
+
+
                     </div>
                 </div>
             </div>

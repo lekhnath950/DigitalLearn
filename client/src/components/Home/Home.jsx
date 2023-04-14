@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import Post from '../../Cards/Post/Post'
 import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
@@ -16,6 +16,7 @@ const Home = () => {
 
     fetchh() ;
   }, [])
+
 
   return (
     <div>
