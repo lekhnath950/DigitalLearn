@@ -13,7 +13,7 @@ function Navbar() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { user } = useSelector(state => state.user)
+  const { user, message } = useSelector(state => state.user)
   const [dialog, setDialog] = React.useState(false)
   const [showPassword, setShowPassword] = useState(false);
 
@@ -28,9 +28,9 @@ function Navbar() {
     try {
       const res = await axios.post("auth/login", { email, password })
       setDialog(false)
-      dispatch(loginSuccess(res.data))
+      dispatch(loginSuccess({ user: res.data, message: res.data.message }))
     } catch (error) {
-      dispatch(loginFailure())
+      dispatch(loginFailure({ message: error.response.data.message }))
     }
   }
 
@@ -47,6 +47,31 @@ function Navbar() {
     dispatch(logout())
   }
 
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [openSearch, setOpenSearch] = useState(false)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`/posts/search?q=${query}`);
+      const data = await response.json();
+      setResults(data);
+      setOpenSearch(true)
+      console.log(data)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const handleCloseSearch = () => {
+    setOpenSearch(false)
+  }
+
   return (
     <div className='Navbar-main'>
       <div>
@@ -54,9 +79,32 @@ function Navbar() {
       </div>
 
       <div className='Navbar-search'>
-        <input type="text" placeholder="Search" className="searchbar" />
-        <SearchIcon />
+        <form onSubmit={handleSubmit}>
+          <input type="text" value={query} onChange={handleInputChange} placeholder="Search" className="searchbar" />
+          <button type='submit' className='searchInputButton'><SearchIcon /></button>
+        </form>
+
       </div>
+
+      <Dialog open={openSearch} onClose={handleCloseSearch}>
+        <DialogActions className="dialog-actions">
+          <Button onClick={handleCloseSearch}>Close</Button>
+        </DialogActions>
+        <DialogTitle>
+        </DialogTitle>
+        <DialogContent>
+          <div>
+            {results.length > 0 ? (
+              results.map((result) => (
+                <div key={result._id}>
+                  <h2>{result.title}</h2>
+                  <p>{result.desc}</p>
+                </div>))) : "No content Available"}
+
+
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <div className='auth'>
         {
@@ -89,6 +137,8 @@ function Navbar() {
             <div onClick={handleToggleShowPassword}>
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </div>
+
+            {message ? message : ""}
             <Button variant='outlined' onClick={handleLogin} >Login</Button>
           </form>
         </DialogContent>

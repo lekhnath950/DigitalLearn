@@ -4,6 +4,7 @@ const initialState = {
     user:null,
     loading:false,
     error:false,
+    message:null
 }
 
 export const userSlice = createSlice({
@@ -15,16 +16,19 @@ export const userSlice = createSlice({
         },
         loginSuccess:(state,action) => {
             state.loading= false;
-            state.user = action.payload;
+            state.user = action.payload.user;
+            state.message = action.payload.message;
         },
         loginFailure:(state,action) => {
             state.loading = false;
             state.error = true;
+            state.message = action.payload.message;
         },
         logout: (state) => {
             state.user = null;
             state.loading = false;
-            state.error = false
+            state.error = false;
+            state.message = null;
         }
     }
 })
