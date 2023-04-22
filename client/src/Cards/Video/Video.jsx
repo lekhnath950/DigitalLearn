@@ -6,6 +6,7 @@ import { postRequest, postSuccess } from '../../redux/postSlice';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import LeftNav from '../../components/Navbar/LeftNav';
+import { Dialog, DialogContent } from '@mui/material';
 
 const Video = () => {
 
@@ -15,6 +16,16 @@ const Video = () => {
 
   const path = useLocation().pathname.split("/")[2]
   const [channel, setChannel] = useState({})
+
+  const [open, setOpen] = useState(false)
+
+  const OpenVideo = () => {
+    setOpen(true)
+  }
+
+  const closee = () => {
+    setOpen(false)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,14 +53,24 @@ const Video = () => {
       <div style={{ display: 'flex' }}>
         <LeftNav />
 
-        <div>
+        <div onClick={OpenVideo}>
+          <img src={currentPost.imgUrl} width={400} />
+        </div>
+
+<Dialog open={open} onClose={closee}>
+  <DialogContent>
           <video width="400px" controls>
             <source src={currentPost && currentPost.videoUrl} type="video/mp4"  />
           </video>
 
+  </DialogContent>
+</Dialog>
+        <div>
+
           <h3>
             {currentPost && currentPost.title}
           </h3>
+          <p>{currentPost.desc}</p>
           <h6>
             posted by:  {channel.name}
           </h6>

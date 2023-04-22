@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, logout } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -99,6 +100,11 @@ function Navbar() {
                 <div key={result._id}>
                   <h2>{result.title}</h2>
                   <p>{result.desc}</p>
+                  <p>
+                    <Link to={`/posts/${result._id}`} >Play Video </Link>
+
+                  </p>
+                  <hr/>
                 </div>))) : "No content Available"}
 
 
