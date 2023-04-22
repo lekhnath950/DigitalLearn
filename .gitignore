@@ -8,4 +8,4 @@
 /client/node_modules/redux-persist
 /client/node_modules/regenerator-runtime
 /client/node_modules/.package-lock.json
-
+/client/.eslintcache
