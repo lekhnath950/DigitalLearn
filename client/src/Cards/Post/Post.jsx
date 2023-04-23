@@ -53,9 +53,14 @@ const Post = ({ post }) => {
                             </AccordionSummary>
                             <AccordionDetails className='post-content'>
                                 <p>{post.desc}</p>
-                                {/* <ul> Tags: <li>{post.tags}</li></ul> */}
+
+                              
                                 
                         <p className='dialog-updated'>{moment(post.createdAt).fromNow()} </p>
+
+                                <ul> Tags: {post.tags}</ul>
+                                
+
                             </AccordionDetails>
                         </Accordion>
 

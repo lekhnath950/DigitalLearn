@@ -6,7 +6,9 @@ import { postRequest, postSuccess } from '../../redux/postSlice';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import LeftNav from '../../components/Navbar/LeftNav';
+
 import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
+
 
 const Video = () => {
 
@@ -55,7 +57,9 @@ const Video = () => {
           <LeftNav />
         </div>
 
+
         <div className='video-feed' >
+
 
         <div onClick={OpenVideo}>
           <img src={currentPost.imgUrl} width={400} />
@@ -79,11 +83,13 @@ const Video = () => {
       </div>
 
       <Dialog open={open} onClose={closee}>
+
         <DialogActions>
           <Button onClick={closee} variant='outlined'>close</Button>
         </DialogActions>
         <DialogContent>
           <video width="500px" controls>
+
             <source src={currentPost && currentPost.videoUrl} type="video/mp4" />
           </video>
 
