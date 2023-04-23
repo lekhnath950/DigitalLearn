@@ -133,17 +133,17 @@ const LeftNav = () => {
                 <DialogContent>
                     <form>
                         <input type="text" placeholder="Title" name='title' onChange={handleInputs} /><br />
-                        <h3>Video</h3>
+                        <p>Choose a Video</p>
                         {
-                            vidPer > 0 ? ("uploading" + vidPer) : (
+                            vidPer > 0 ? ("uploading" + vidPer + "%") : (
                                 <input type="file" accept='video/*' placeholder='Video' onChange={(e) => setVid(e.target.files[0])} />
                             )
                         }   <br />
                         <input type="text" placeholder='description' name="desc" onChange={handleInputs} /> <br />
                         <input type="text" placeholder="tags" onChange={Tag} /><br />
-                        <h3>Thumbnail</h3>
+                        <p>Choose a Thumbnail</p>
                         {
-                            imgPer > 0 ? ("uploading.." + imgPer) : (
+                            imgPer > 0 ? ("uploading.." + imgPer + "%") : (
                                 <input type="file" accept='image/*' placeholder="thumbnail" onChange={(e) => setImg(e.target.files[0])} />
 
                             )
