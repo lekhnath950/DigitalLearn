@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react'
 import Post from '../../Cards/Post/Post'
 import axios from 'axios'
 import Navbar from '../Navbar/Navbar'
@@ -14,26 +14,25 @@ const Home = () => {
       setPost(res.data)
     }
 
-    fetchh() ;
+    fetchh();
   }, [])
 
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
 
-      
-      <div className='home'>
-        <LeftNav/>
+      <div className='main-home'>
+        <div className='navbar-home'>
+          <LeftNav />
+        </div>
 
-      {post.map((posts)=> (
-        <Post key={posts.title} post={posts}/> 
-
-      ))}
-
-</div>
-
-
+        <div className='content-feed'>
+          {post.map((posts) => (
+            <Post key={posts.title} post={posts} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
