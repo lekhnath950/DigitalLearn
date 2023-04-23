@@ -1,13 +1,53 @@
 .videoPage{
     margin-top: 70px;
 }
-/* 
-.navbar-video{
-    background-color: yellowgreen;
-} */
+
 
 .video-feed{
     margin-left: 30vw;
     border: 1px solid grey;
-    width: min-content;
 }
+
+video{
+    border-radius: 10px;
+}
+
+.video-feed {
+    margin-left: 20vw;
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60vw;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .video-feed img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 3%;
+  }
+  
+  .video-feed h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .video-feed p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .video-feed h6 {
+    font-size: 16px;
+    font-style: italic;
+    color: #999;
+  }
+  
+
+

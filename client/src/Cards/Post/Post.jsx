@@ -53,12 +53,17 @@ const Post = ({ post }) => {
                             </AccordionSummary>
                             <AccordionDetails className='post-content'>
                                 <p>{post.desc}</p>
+
+                              
+                                
+                        <p className='dialog-updated'>{moment(post.createdAt).fromNow()} </p>
+
                                 <ul> Tags: {post.tags}</ul>
                                 
+
                             </AccordionDetails>
                         </Accordion>
 
-                        <p className='dialog-updated'>{moment(post.createdAt).fromNow()} </p>
 
                         <Dialog open={open} onClose={handleClose}>
                             <div className="dialog-title">{post.title}</div>
