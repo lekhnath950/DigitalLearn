@@ -1,0 +1,13 @@
+.videoPage{
+    margin-top: 70px;
+}
+/* 
+.navbar-video{
+    background-color: yellowgreen;
+} */
+
+.video-feed{
+    margin-left: 30vw;
+    border: 1px solid grey;
+    width: min-content;
+}

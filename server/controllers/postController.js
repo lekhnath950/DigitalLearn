@@ -72,7 +72,7 @@ export const addView = async (req,res,next) => {
 export const random = async (req,res,next) => {
     try {
 
-        const post = await Post.aggregate([{$sample: {size: 2}}])
+        const post = await Post.aggregate([{$sample: {size: 4}}])
         res.status(200).json(post)
         
     } catch (err) {
@@ -130,7 +130,7 @@ export const search = async (req,res,next) => {
                 { title: { $regex: query, $options: "i" } },
                 { desc: { $regex: query, $options: "i" } }
             ] }
-            ).limit(2).sort({views:-1})
+            ).limit(5).sort({views:-1})
         res.status(200).json(post)
         
     } catch (err) {

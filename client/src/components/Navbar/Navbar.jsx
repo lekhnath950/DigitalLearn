@@ -74,9 +74,13 @@ function Navbar() {
   }
 
   return (
+    <div className=''>
     <div className='Navbar-main'>
-      <div>
+
+      <div className='aa'>
+        <Link to="/" >
         <h3>DigitalLearn</h3>
+        </Link>
       </div>
 
       <div className='Navbar-search'>
@@ -85,6 +89,28 @@ function Navbar() {
           <button type='submit' className='searchInputButton'><SearchIcon /></button>
         </form>
 
+      </div>
+
+
+
+      <div className='auth'>
+        {
+          user ? (
+            <div>
+              <Button variant='outlined' onClick={logoutt} >Logout</Button>
+            </div>
+
+          ) : (
+            <div className='auth-right'>
+              <Button variant='outlined' onClick={Dialogbox} >Login</Button>
+              <div>
+                <Button variant='outlined' disabled>Sign Up</Button>
+              </div>
+            </div>
+
+          )
+        }
+      </div>
       </div>
 
       <Dialog open={openSearch} onClose={handleCloseSearch}>
@@ -112,24 +138,6 @@ function Navbar() {
         </DialogContent>
       </Dialog>
 
-      <div className='auth'>
-        {
-          user ? (
-            <div>
-              <Button variant='outlined' onClick={logoutt} >Logout</Button>
-            </div>
-
-          ) : (
-            <div className='auth-right'>
-              <Button variant='outlined' onClick={Dialogbox} >Login</Button>
-              <div>
-                <Button variant='outlined' disabled>Sign Up</Button>
-              </div>
-            </div>
-
-          )
-        }
-      </div>
 
       <Dialog open={dialog} className='' onClose={handleClose}>
         <DialogActions className="dialog-actions">

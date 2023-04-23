@@ -1,4 +1,14 @@
-.home{
+.main-home{
     display: flex;
-    /* justify-content: space-between; */
+    margin-top: 60px;
+    position: relative;
+    /* margin-left: 80vw; */
+}
+
+.content-feed{
+    display: grid;
+    grid-template-columns: 30vw 30vw;
+    gap: 5vw;
+    margin-left: 24vw;
+
 }

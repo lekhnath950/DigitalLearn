@@ -1,8 +1,12 @@
 .Navbar-main{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1px 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99;
 }
 
 .Navbar-search{
@@ -11,7 +15,8 @@
     margin-left: 100px;
     border: 1px solid grey;
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 3px 10px;
+    align-items: center;
 }
 
 .searchbar{
@@ -19,12 +24,14 @@
     width: 30vw;
     border: 0px;
     outline: none;
+    background-color: transparent;
 }
 
 .searchInputButton{
     border: none;
     background-color: transparent;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .auth{
@@ -48,11 +55,18 @@
     gap: 20px;
 }
 
+.aa a{
+    text-decoration: none;
+}
+
 
 .menu-main{
     background-color:rgb(217, 211, 203);
     width: 200px;
     height:100vh;
+    position: fixed;
+    left: 0;
+    z-index: 1;
 }
 
 .menus{

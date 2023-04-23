@@ -44,28 +44,25 @@ const Video = () => {
       }
     }
     fetchData()
-  }, [path,dispatch])  
+  }, [path, dispatch])
 
   return (
     <div>
       <Navbar />
 
-      <div style={{ display: 'flex' }}>
-        <LeftNav />
+      <div className='videoPage'>
+        <div className='navbar-video'>
+          <LeftNav />
+        </div>
+
+        <div className='video-feed' >
 
         <div onClick={OpenVideo}>
           <img src={currentPost.imgUrl} width={400} />
         </div>
 
-<Dialog open={open} onClose={closee}>
-  <DialogContent>
-          <video width="400px" controls>
-            <source src={currentPost && currentPost.videoUrl} type="video/mp4"  />
-          </video>
 
-  </DialogContent>
-</Dialog>
-        <div>
+        <div className=''>
 
           <h3>
             {currentPost && currentPost.title}
@@ -76,8 +73,19 @@ const Video = () => {
           </h6>
         </div>
 
+        </div>
+
 
       </div>
+
+      <Dialog open={open} onClose={closee}>
+        <DialogContent>
+          <video width="400px" controls>
+            <source src={currentPost && currentPost.videoUrl} type="video/mp4" />
+          </video>
+
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

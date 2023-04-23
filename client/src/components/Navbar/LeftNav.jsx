@@ -7,7 +7,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import app from '../../firebase';
 import axios from 'axios';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 
 const LeftNav = () => {
@@ -20,7 +20,7 @@ const LeftNav = () => {
     const [tags, setTags] = useState([])
     const [inputs, setInputs] = useState({})
 
-    const {user} = useSelector(state=>state.user)
+    const { user } = useSelector(state => state.user)
 
 
     const Tag = (e) => {
@@ -44,7 +44,7 @@ const LeftNav = () => {
     const upload = (file, urlType) => {
         const storage = getStorage(app);
         const fileName = new Date().getTime() + file.name;
-        const storageRef = ref(storage,  fileName);
+        const storageRef = ref(storage, fileName);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on('state_changed',
@@ -62,7 +62,7 @@ const LeftNav = () => {
                         break;
                 }
             },
-            (error) => {},
+            (error) => { },
 
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -75,15 +75,15 @@ const LeftNav = () => {
         );
 
     }
-    
-    useEffect(() => { 
+
+    useEffect(() => {
         vid && upload(vid, "videoUrl");
     }, [vid])
-    
-    useEffect(() => { 
-        img && upload(img, "imgUrl") ;
+
+    useEffect(() => {
+        img && upload(img, "imgUrl");
     }, [img])
-    
+
     const handleUpload = async (e) => {
         e.preventDefault();
         const data = {
@@ -92,7 +92,7 @@ const LeftNav = () => {
             videoUrl: inputs.videoUrl
         }
         const res = await axios.post("/posts", data)
-        res.status===200 && console.log(res.data)
+        res.status === 200 && console.log(res.data)
         setDialog(false);
         console.log("inputs")
     }
@@ -100,36 +100,28 @@ const LeftNav = () => {
         <div className='menu-main'>
 
             <Link to="/">
-            
+
+                <div className='menus'>
+                    <HomeIcon />
+                    <h4>Home</h4>
+                </div>
+            </Link>
             <div className='menus'>
-                <HomeIcon />
-                <h4>Home</h4>
-            </div>
-                </Link>
-            <div className='menus'>
-                <Category/>
+                <Category />
                 <h4>Category</h4>
             </div>
-            {user? (
+            {user ? (
 
-            <div className='menus' onClick={DialogBox}>
-                <Upload />
-                <h4>Upload</h4>
-            </div>
+                <div className='menus' onClick={DialogBox}>
+                    <Upload />
+                    <h4>Upload</h4>
+                </div>
             ) : (
                 ""
-
             )}
-            {/* <div className='menus'>
-                <HomeIcon />
-                <h4>Popular</h4>
-            </div>
+
             <div className='menus'>
-                <HomeIcon />
-                <h4>Subscriptions</h4>
-            </div> */}
-            <div className='menus'>
-                <SettingIcon/>
+                <SettingIcon />
                 <h4>Settings</h4>
             </div>
 
