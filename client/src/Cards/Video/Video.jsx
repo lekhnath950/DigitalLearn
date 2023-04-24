@@ -8,6 +8,9 @@ import Navbar from '../../components/Navbar/Navbar';
 import LeftNav from '../../components/Navbar/LeftNav';
 import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 
+import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
+
+
 const Video = () => {
 
   const { user } = useSelector((state) => state.user)
@@ -55,10 +58,19 @@ const Video = () => {
           <LeftNav />
         </div>
 
+<<<<<<< HEAD
         <div className='video-feed' >
 
         <div onClick={OpenVideo}>
           <img src={currentPost.imgUrl} width={400} />
+=======
+
+        <div className='video-feed' >
+
+
+        <div onClick={OpenVideo}>
+          <img src={ currentPost && currentPost.imgUrl} width={400} />
+>>>>>>> refs/remotes/origin/main
         </div>
 
 
@@ -67,7 +79,11 @@ const Video = () => {
           <h3>
             {currentPost && currentPost.title}
           </h3>
+<<<<<<< HEAD
           <p>{currentPost.desc}</p>
+=======
+          <p>{currentPost && currentPost.desc}</p>
+>>>>>>> refs/remotes/origin/main
           <h6>
             posted by:  {channel.name}
           </h6>
@@ -79,11 +95,19 @@ const Video = () => {
       </div>
 
       <Dialog open={open} onClose={closee}>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
         <DialogActions>
           <Button onClick={closee} variant='outlined'>close</Button>
         </DialogActions>
         <DialogContent>
           <video width="500px" controls>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
             <source src={currentPost && currentPost.videoUrl} type="video/mp4" />
           </video>
 

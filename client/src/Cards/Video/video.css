@@ -1,15 +1,22 @@
 .videoPage{
     margin-top: 70px;
 }
+<<<<<<< HEAD
 /* 
 .navbar-video{
     background-color: yellowgreen;
 } */
+=======
+
+>>>>>>> refs/remotes/origin/main
 
 .video-feed{
     margin-left: 30vw;
     border: 1px solid grey;
+<<<<<<< HEAD
     /* width: min-content; */
+=======
+>>>>>>> refs/remotes/origin/main
 }
 
 video{
@@ -52,4 +59,10 @@ video{
     font-style: italic;
     color: #999;
   }
+<<<<<<< HEAD
   
+=======
+  
+
+
+>>>>>>> refs/remotes/origin/main
