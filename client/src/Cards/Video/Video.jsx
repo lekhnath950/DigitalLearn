@@ -62,7 +62,7 @@ const Video = () => {
 
 
         <div onClick={OpenVideo}>
-          <img src={currentPost.imgUrl} width={400} />
+          <img src={ currentPost && currentPost.imgUrl} width={400} />
         </div>
 
 
@@ -71,7 +71,7 @@ const Video = () => {
           <h3>
             {currentPost && currentPost.title}
           </h3>
-          <p>{currentPost.desc}</p>
+          <p>{currentPost && currentPost.desc}</p>
           <h6>
             posted by:  {channel.name}
           </h6>
