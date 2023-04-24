@@ -53,20 +53,9 @@ const Post = ({ post }) => {
                             </AccordionSummary>
                             <AccordionDetails className='post-content'>
                                 <p>{post.desc}</p>
-<<<<<<< HEAD
                                 {/* <ul> Tags: <li>{post.tags}</li></ul> */}
                                 
                         <p className='dialog-updated'>{moment(post.createdAt).fromNow()} </p>
-=======
-
-                              
-                                
-                        <p className='dialog-updated'>{moment(post.createdAt).fromNow()} </p>
-
-                                <ul> Tags: {post.tags}</ul>
-                                
-
->>>>>>> refs/remotes/origin/main
                             </AccordionDetails>
                         </Accordion>
 
