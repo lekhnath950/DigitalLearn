@@ -60,17 +60,26 @@
 a{
     text-decoration: none;
     color: unset;
-
 }
 
 
 .menu-main{
     background-color:#F5F5F5;
-    width: 200px;
+    width: max-content;
     height:100vh;
     position: fixed;
     left: 0;
     z-index: 1;
+}
+
+@media screen and (max-width: 500px) {
+    .menus h4{
+        display: none;
+    }
+}
+
+.menus h4{
+    font-size: 0.8rem;
 }
 
 .menus{
@@ -81,9 +90,9 @@ a{
     align-items: center;
     gap: 5px;
     line-height: 1px;
-
+    
     padding: 12px;
-    border-radius: 4px;
+    /* border-radius: 4px; */
     transition: background-color 0.3s ease;
 }
 
