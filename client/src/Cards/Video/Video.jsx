@@ -47,6 +47,9 @@ const Video = () => {
     fetchData()
   }, [path, dispatch])
 
+
+
+
   return (
     <div>
       <Navbar />
@@ -86,6 +89,7 @@ const Video = () => {
         <DialogContent>
           <video width="500px" controls>
             <source src={currentPost && currentPost.videoUrl} type="video/mp4" />
+
           </video>
 
         </DialogContent>

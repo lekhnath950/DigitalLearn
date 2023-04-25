@@ -106,10 +106,13 @@ const LeftNav = () => {
                     <h4>Home</h4>
                 </div>
             </Link>
+
+            <Link to="/category">
             <div className='menus'>
                 <Category />
                 <h4>Category</h4>
             </div>
+            </Link>
             {user ? (
 
                 <div className='menus' onClick={DialogBox}>
