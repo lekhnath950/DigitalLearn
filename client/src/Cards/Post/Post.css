@@ -1,6 +1,6 @@
 .post {
     border: 1px solid grey;
-    max-width: 30vw;
+    /* max-width: 30vw; */
     border-radius: 10px;
 }
 
@@ -145,3 +145,40 @@
         font-size: 14px;
     }
 }
+
+
+
+
+
+
+.abb{
+    display: flex;
+    height: 200px;
+    overflow-y: hidden;
+    gap: 5px;
+}
+
+div p {
+    text-overflow: ellipsis;
+    text-align: justify;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+}
+
+.imggg{
+    padding: 5px 1px;
+}
+
+.iii{
+    text-align: center;
+    margin: auto 30px;
+}
+
+
+
+
+

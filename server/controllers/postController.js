@@ -72,7 +72,7 @@ export const addView = async (req,res,next) => {
 export const random = async (req,res,next) => {
     try {
 
-        const post = await Post.aggregate([{$sample: {size: 4}}])
+        const post = await Post.aggregate([{$sample: {size: 6}}])
         res.status(200).json(post)
         
     } catch (err) {

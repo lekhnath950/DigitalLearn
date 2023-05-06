@@ -1,4 +1,4 @@
-.Navbar-main{
+.Navbar-main {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -11,7 +11,7 @@
 
 }
 
-.Navbar-search{
+.Navbar-search {
     display: flex;
     align-items: center;
     margin-left: 100px;
@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.searchbar{
+.searchbar {
     height: 30px;
     width: 30vw;
     border: 0px;
@@ -29,51 +29,51 @@
     background-color: transparent;
 }
 
-.searchInputButton{
+.searchInputButton {
     border: none;
     background-color: transparent;
     cursor: pointer;
     vertical-align: middle;
 }
 
-.auth{
+.auth {
     display: flex;
     gap: 10px;
 }
 
-.auth-right{
+.auth-right {
     display: flex;
     gap: 12px;
 }
 
 
-.leftnav{
+.leftnav {
     background-color: rgb(243, 211, 211);
 }
 
-.navbar-menu{
+.navbar-menu {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-a{
+a {
     text-decoration: none;
     color: unset;
 
 }
 
 
-.menu-main{
-    background-color:#F5F5F5;
+.menu-main {
+    background-color: #F5F5F5;
     width: 200px;
-    height:100vh;
+    height: 100vh;
     position: fixed;
     left: 0;
     z-index: 1;
 }
 
-.menus{
+.menus {
     /* border: 1px solid grey; */
     box-shadow: 1px 1px 2px black;
     display: flex;
@@ -88,7 +88,7 @@ a{
 }
 
 
-.menus:hover{
+.menus:hover {
     /* background-color: wheat; */
     border-bottom: 1px solid black;
     background-color: #f2f2f2;
@@ -102,23 +102,23 @@ a{
     font-size: 24px;
     font-weight: bold;
     padding: 10px !important;
-  }
-  
-  .dialog-content form {
+}
+
+.dialog-content form {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-  }
-  
-  .dialog-content input {
+}
+
+.dialog-content input {
     margin-bottom: 10px;
     padding: 10px;
     border: none;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  }
-  
-  .dialog-actions button {
+}
+
+.dialog-actions button {
     background-color: #2196f3;
     color: white;
     border: none;
@@ -126,9 +126,44 @@ a{
     padding: 5px 10px;
     font-size: 14px;
     cursor: pointer;
-  }
-  
-  .dialog-actions button:hover {
+}
+
+.dialog-actions button:hover {
     background-color: #0c7cd5;
+}
+
+
+.menu-main header{
+    width: max-content !important;
+    right: auto !important;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 500px) {
+  .mobile {
+    display: block;
+    /* z-index: 20000000; */
+    margin-top: 14%;
   }
-  
+
+  .notmob{
+    display: none;
+  }
+
+
+  .menu-main {
+    width: auto;
+    height: auto;
+}
+}
+
+@media screen and (min-width: 501px) {
+  .mobile {
+    display: none !important;
+  }
+}
+
+.a23 svg{
+    fill: black;
+}
