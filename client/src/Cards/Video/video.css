@@ -2,10 +2,10 @@
     margin-top: 70px;
 }
 
-
 .video-feed{
     margin-left: 30vw;
     border: 1px solid grey;
+    /* width: min-content; */
 }
 
 video{
@@ -49,5 +49,3 @@ video{
     color: #999;
   }
   
-
-
