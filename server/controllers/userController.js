@@ -76,21 +76,21 @@ export const unsubscribe = async (req,res, next) => {
     }
 }
 
-export const like = async (req,res, next) => {
-    const id = req.user.id
-    const postId = req.params.postId
-    try {
-        await Post.findByIdAndUpdate(postId,{
-            $addToSet:{likes:id},
-            $pull:{dislikes:id}
-        })
+// export const like = async (req,res, next) => {
+//     const id = req.user.id
+//     const postId = req.params.postId
+//     try {
+//         await Post.findByIdAndUpdate(postId,{
+//             $addToSet:{likes:id},
+//             $pull:{dislikes:id}
+//         })
 
-        res.status(200).json("Post Liked")
+//         res.status(200).json("Post Liked")
 
-    } catch (err) {
-        next(err)
-    }
-}
+//     } catch (err) {
+//         next(err)
+//     }
+// }
 
 
 export const love = async (req,res,next) => {
@@ -100,19 +100,30 @@ export const love = async (req,res,next) => {
             return res.status(404).json("Post not found")
         }
 
-        if(post.likes.includes(req.user._id)){
-            const index = post.likes.indexOf(req.user._id);
+        if(post.likes.includes(req.user.userId)){
+            console.log(req.user.id)
+            const index = post.likes.indexOf(req.user.id);
             post.likes.splice(index,1)
             await post.save();
             return res.status(200).json("Post unliked")
         } else {
-            post.likes.push(req.user._id);
+            console.log(req.user.id)
+            post.likes.push(req.user.id);
             await post.save();
             return res.status(200).json("Post liked")
         }
 
-        console.log(post)
     } catch (error) {
         next(error)
     }
 }
+
+export const userLikes = async (req, res, next) => {
+    try {
+      const userId = req.params.userId;
+      const posts = await Post.find({ likes: userId });
+      return res.status(200).json(posts);
+    } catch (error) {
+      next(error);
+    }
+  }

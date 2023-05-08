@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Video from './Cards/Video/Video';
 import Upload from './components/Upload/Upload';
 import Category from './components/Category/Category';
+import Fav from './components/Fav';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path='/upload' element={<Upload />}  />
             <Route path='/category' element={<Category />}  />
             <Route path="/posts/:id" element={<Video />} />
+            <Route path="/fav/:id" element={<Fav />} />
           </Routes>
 
         </div>

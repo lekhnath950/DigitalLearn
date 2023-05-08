@@ -7,6 +7,7 @@ import { AppBar, Drawer, IconButton, Toolbar } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const LeftNav = () => {
 
@@ -17,6 +18,13 @@ const LeftNav = () => {
     const toggleDrawer = () => {
         setOpenDrawer(!openDrawer);
     };
+
+
+    let id;
+    if (user) {
+        id = user._id;
+    }
+
 
     return (
         <div className='menu-main'>
@@ -45,20 +53,29 @@ const LeftNav = () => {
                     </Link>
 
                     {user ? (
+                        <>
 
-                        <Link to="/upload">
-                            <div className='menus'>
-                                <Upload />
-                                <h4>Upload</h4>
-                            </div>
-                        </Link>
+                            <Link to="/upload">
+                                <div className='menus'>
+                                    <Upload />
+                                    <h4>Upload</h4>
+                                </div>
+                            </Link>
+                            <Link to={`/fav/${id}`}>
+                                <div className='menus'>
+                                    <FavoriteIcon />
+                                    <h4>Fav</h4>
+                                </div>
+                            </Link>
+
+                        </>
                     ) : (
                         ""
                     )}
 
                     <div className='menus'>
                         <SettingIcon />
-                        <h4>Settings</h4>
+                        <h4>Fav</h4>
                     </div>
                 </Drawer>
             </AppBar>
@@ -82,16 +99,26 @@ const LeftNav = () => {
                     </div>
                 </Link>
                 {user ? (
+                    <>
 
-                    <Link to="/upload">
-                        <div className='menus'>
-                            <Upload />
-                            <h4>Upload</h4>
-                        </div>
-                    </Link>
+                        <Link to="/upload">
+                            <div className='menus'>
+                                <Upload />
+                                <h4>Upload</h4>
+                            </div>
+                        </Link>
+                        <Link to={`/fav/${id}`}>
+                            <div className='menus'>
+                                <FavoriteIcon />
+                                <h4>Fav</h4>
+                            </div>
+                        </Link>
+
+                    </>
                 ) : (
                     ""
                 )}
+
 
                 <div className='menus'>
                     <SettingIcon />

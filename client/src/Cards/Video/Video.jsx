@@ -43,19 +43,19 @@ const Video = () => {
     fetchData()
   }, [path, dispatch])
 
-  const [likee, setLikee] = useState(0)
-  const [liked,setLiked] = useState(false)
+  // const [likee, setLikee] = useState(0)
+  // const [liked,setLiked] = useState(false)
 
   const likeHandle = async () => {
     await axios.put(`/users/love/${currentPost._id}`)
 
-    if(!liked) {
-      setLiked(true)
-      setLikee(likee + 1)
-    } else {
-      setLiked(false)
-      setLikee(likee -1)
-    }
+    // if(!liked) {
+    //   setLiked(true)
+    //   setLikee(likee + 1)
+    // } else {
+    //   setLiked(false)
+    //   setLikee(likee -1)
+    // }
   }
 
 
@@ -82,8 +82,10 @@ const Video = () => {
             {currentPost && currentPost.title}
           </h3>
           <p>{currentPost && currentPost.desc}</p>
-          <p>{currentPost && currentPost.likes.length + likee}</p>
-          <span><button onClick={likeHandle}> {liked? "unlike" :"like"} </button></span>
+          <p>{currentPost && currentPost.likes.length }</p>
+          <p>{currentPost && currentPost.likes }</p>
+          {/* <span><button onClick={likeHandle}> {liked? "unlike" :"like"} </button></span> */}
+          <span><button onClick={likeHandle}> like </button></span>
           <h6>
             posted by:  {channel.name}
           </h6>
