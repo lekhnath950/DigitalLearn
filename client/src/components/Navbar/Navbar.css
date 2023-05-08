@@ -65,10 +65,11 @@ a {
 
 .menu-main {
     background-color: #F5F5F5;
-    width: 200px;
+    width: 180px;
     height: 100vh;
     position: fixed;
     left: 0;
+    top: 10% !important;
     z-index: 1;
 }
 

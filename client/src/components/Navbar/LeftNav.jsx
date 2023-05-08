@@ -68,6 +68,13 @@ const LeftNav = () => {
                                 </div>
                             </Link>
 
+                            <Link to={`/profile/${id}`}>
+                                <div className='menus'>
+                                    <Upload />
+                                    <h4>Profile</h4>
+                                </div>
+                            </Link>
+
                         </>
                     ) : (
                         ""
@@ -111,6 +118,13 @@ const LeftNav = () => {
                             <div className='menus'>
                                 <FavoriteIcon />
                                 <h4>Fav</h4>
+                            </div>
+                        </Link>
+
+                        <Link to={`/profile/${id}`}>
+                            <div className='menus'>
+                                <Upload />
+                                <h4>Profile</h4>
                             </div>
                         </Link>
 

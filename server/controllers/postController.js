@@ -47,16 +47,18 @@ export const deletePost = async (req,res,next) => {
     }
 }
 
+import mongoose from "mongoose"
+
 export const getPost = async (req,res,next) => {
     try {
-
-        const post = await Post.findById(req.params.id)
+        await Post.findById(req.params.id)
+        const post = await Post.find({ userId: req.params.id });
         res.status(200).json(post)
         
     } catch (err) {
         next(err)
     }
-}
+} 
 export const addView = async (req,res,next) => {
     try {
 

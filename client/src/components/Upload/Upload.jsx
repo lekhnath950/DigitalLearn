@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './Upload.css'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 import app from '../../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from 'axios';
+import Navbar from '../Navbar/Navbar';
+import LeftNav from '../Navbar/LeftNav';
 
 
 const Upload = () => {
@@ -17,7 +19,7 @@ const Upload = () => {
     const [tags, setTags] = useState([])
     const [inputs, setInputs] = useState({})
 
-    const { user } = useSelector(state => state.user)
+    // const { user } = useSelector(state => state.user)
 
     const Tag = (e) => {
         setTags(e.target.value.split(","))
@@ -96,7 +98,16 @@ const Upload = () => {
     }
 
   return (
+
     <div>
+
+        <div>
+            <Navbar/>
+        </div>
+        <div>
+            <LeftNav/>
+        </div>
+    <div style={{margin:300}}>
 
         <button onClick={DialogBox}>click </button>
 
@@ -129,6 +140,8 @@ const Upload = () => {
                 </DialogContent>
             </Dialog>
 
+
+    </div>
 
     </div>
   )

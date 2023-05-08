@@ -5,6 +5,7 @@ import Video from './Cards/Video/Video';
 import Upload from './components/Upload/Upload';
 import Category from './components/Category/Category';
 import Fav from './components/Fav';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/category' element={<Category />}  />
             <Route path="/posts/:id" element={<Video />} />
             <Route path="/fav/:id" element={<Fav />} />
+            <Route path="/profile/:id" element={<Profile />} />
           </Routes>
 
         </div>

@@ -11,7 +11,7 @@ import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 
 const Video = () => {
 
-  const { user } = useSelector((state) => state.user)
+  // const { user } = useSelector((state) => state.user)
   const { currentPost } = useSelector((state) => state.postx)
   const dispatch = useDispatch()
 
@@ -72,14 +72,14 @@ const Video = () => {
         <div className='video-feed' >
 
         <div onClick={OpenVideo}>
-          <img src={currentPost && currentPost.imgUrl} width={400} />
+          <img src={currentPost && currentPost.imgUrl} width={400} alt="post"/>
         </div>
 
 
         <div className=''>
 
           <h3>
-            {currentPost && currentPost.title}
+            {currentPost && currentPost.title} 
           </h3>
           <p>{currentPost && currentPost.desc}</p>
           <p>{currentPost && currentPost.likes.length }</p>
