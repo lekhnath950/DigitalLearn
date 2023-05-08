@@ -82,7 +82,7 @@ export const random = async (req,res,next) => {
 export const trend = async (req,res,next) => {
     try {
 
-        const post = await Post.find().sort({views:-1})
+        const post = await Post.find().sort({likes:-1})
         res.status(200).json(post)
         
     } catch (err) {

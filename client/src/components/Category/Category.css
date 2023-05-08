@@ -1,5 +1,5 @@
 .category{
-    margin-left: 20vw;
+    margin-left: 0vw;
 }
 
 .category {
@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    /* font-size: 2rem; */
     font-weight: bold;
     margin-top: 2rem;
   }

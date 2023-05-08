@@ -30,14 +30,10 @@ const Video = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("jj")
       dispatch(postRequest())
-      console.log("jj1")
       try {
         const videoRes = await axios.get(`/posts/find/${path}`) //to get video from the postid
-        console.log("jj2")
         const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`)  //to get the channel data
-        console.log("jj3")
         setChannel(channelRes.data)
         dispatch(postSuccess(videoRes.data))
       } catch (error) {
@@ -47,6 +43,20 @@ const Video = () => {
     fetchData()
   }, [path, dispatch])
 
+  const [likee, setLikee] = useState(0)
+  const [liked,setLiked] = useState(false)
+
+  const likeHandle = async () => {
+    await axios.put(`/users/love/${currentPost._id}`)
+
+    if(!liked) {
+      setLiked(true)
+      setLikee(likee + 1)
+    } else {
+      setLiked(false)
+      setLikee(likee -1)
+    }
+  }
 
 
 
@@ -72,6 +82,8 @@ const Video = () => {
             {currentPost && currentPost.title}
           </h3>
           <p>{currentPost && currentPost.desc}</p>
+          <p>{currentPost && currentPost.likes.length + likee}</p>
+          <span><button onClick={likeHandle}> {liked? "unlike" :"like"} </button></span>
           <h6>
             posted by:  {channel.name}
           </h6>

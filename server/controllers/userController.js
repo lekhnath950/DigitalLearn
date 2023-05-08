@@ -92,3 +92,27 @@ export const like = async (req,res, next) => {
     }
 }
 
+
+export const love = async (req,res,next) => {
+    try {
+        const post = await Post.findById(req.params.postId)
+        if(!post){
+            return res.status(404).json("Post not found")
+        }
+
+        if(post.likes.includes(req.user._id)){
+            const index = post.likes.indexOf(req.user._id);
+            post.likes.splice(index,1)
+            await post.save();
+            return res.status(200).json("Post unliked")
+        } else {
+            post.likes.push(req.user._id);
+            await post.save();
+            return res.status(200).json("Post liked")
+        }
+
+        console.log(post)
+    } catch (error) {
+        next(error)
+    }
+}
