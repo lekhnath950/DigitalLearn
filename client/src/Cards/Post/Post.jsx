@@ -8,7 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Post = ({ post }) => {
 
-    const [channel, setChannel] = React.useState({})
+    const [channel, setChannel] = useState({})
 
     useEffect(() => {
         const fetchChannel = async () => {
@@ -32,12 +32,14 @@ const Post = ({ post }) => {
                     </div>
 
                     <div>
-                        <h3>{post.title}</h3>
+                        <h3>{post.title} <span style={{fontSize:10}}> [{moment(post.createdAt).fromNow()}] </span></h3>
                         <p>{post.desc}</p>
                     </div>
 
                     <div className='iii'>
-                    <FavoriteBorderIcon/>
+                    <FavoriteBorderIcon />
+                    <p>{post.likes.length}</p>
+                    <p>{channel.__v}</p>
                     </div>
                 </div>
 
