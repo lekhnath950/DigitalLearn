@@ -6,19 +6,36 @@ import Upload from './components/Upload/Upload';
 import Category from './components/Category/Category';
 import Fav from './components/Fav';
 import Profile from './components/Profile/Profile';
+import Admin from './components/AdminPanel/Admin';
+import { useSelector } from 'react-redux';
+import Signup from './components/Auth/Signup';
 
 function App() {
+  const {user} = useSelector(state=> state.user)
   return (
     <div className="">
       <Router>
         <div >
           <Routes>
             <Route path='/' element={<Home />}  />
-            <Route path='/upload' element={<Upload />}  />
             <Route path='/category' element={<Category />}  />
+            <Route path='/signup' element={<Signup />}  />
+            {
+              user && user.role === "owner" ? (
+                <Route path='/admin' element={<Admin />}  />
+                
+                ) : ("")
+              }
+            {
+              user && (user.role === "admin" || user.role === "owner") ? (
+                <Route path='/upload' element={<Upload />}  />
+
+              ) : ("")
+            }
             <Route path="/posts/:id" element={<Video />} />
             <Route path="/fav/:id" element={<Fav />} />
             <Route path="/profile/:id" element={<Profile />} />
+
           </Routes>
 
         </div>

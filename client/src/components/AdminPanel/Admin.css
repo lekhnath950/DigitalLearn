@@ -1,0 +1,11 @@
+.adminTable{
+    border: 1px solid grey;
+}
+
+.adminTable tr th{
+    border: 1px solid grey;
+}
+
+.adminTable tbody tr td{
+    border: 1px solid grey;
+}

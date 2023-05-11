@@ -30,6 +30,12 @@ const UserSchema = new mongoose.Schema({
     subscribedUsers: {
         type: [String]
     },
+
+    role: {
+        type: String,
+        enum: ['admin', 'owner', 'user'],
+        default: 'user'
+      },
 },
 
     {

@@ -109,7 +109,7 @@ const Upload = () => {
         </div>
     <div style={{margin:300}}>
 
-        <button onClick={DialogBox}>click </button>
+        <Button variant='outlined' onClick={DialogBox}>click here to Upload </Button>
 
 
         <Dialog open={dialog} onClose={handleClose}>

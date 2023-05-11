@@ -8,7 +8,7 @@ import {Pagination} from '@mui/material'
 
 
 const Home = () => {
-  const [post, setPost] = React.useState([])
+  const [post, setPost] = useState([])
   const [page, setPage] = useState(1)
 
   const handleChange = (event,value) => {

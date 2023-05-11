@@ -23,6 +23,21 @@ export const update = async (req,res, next) => {
     }
 }
 
+export const updateByAdmin = async (req,res,next) => {
+    try {
+
+        const user = await User.findByIdAndUpdate(req.params.id,
+            {
+                $set:req.body,
+            },
+            {new: true})
+
+        res.status(200).json(user);
+    } catch (error) {
+        next(error)
+    }
+} 
+
 
 export const deleteUser = async (req,res, next) => {
     if(req.params.id === req.user.id) {
@@ -127,3 +142,14 @@ export const userLikes = async (req, res, next) => {
       next(error);
     }
   }
+
+
+export const allUser = async(req,res,next) => {
+    try {
+        const users = await User.find()
+        // console.log(users)
+        return res.status(200).json(users)
+    } catch (error) {
+        next(error)
+    }
+}

@@ -8,12 +8,14 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 const LeftNav = () => {
 
     const { user } = useSelector(state => state.user)
 
     const [openDrawer, setOpenDrawer] = useState(false);
+    const [tab, setTab] = useState(window.location.pathname);
 
     const toggleDrawer = () => {
         setOpenDrawer(!openDrawer);
@@ -37,17 +39,20 @@ const LeftNav = () => {
                     </IconButton>
                 </Toolbar>
                 <Drawer anchor='left' open={openDrawer} onClose={toggleDrawer}>
-                    <Link to="/">
+                    <Link to="/" onClick={() => setTab("/")}>
 
                         <div className='menus' >
-                            <HomeIcon />
+                            {
+                                tab === "/" ? "h" : <HomeIcon />
+                            }
+                            
                             <h4>Home</h4>
                         </div>
                     </Link>
 
-                    <Link to="/category/">
+                    <Link to="/category/" onClick={() => setTab("/")}>
                         <div className='menus' onClick={toggleDrawer}>
-                            <Category />
+                           {tab === "/category/" ? <Category/> : "hi"}
                             <h4>Category</h4>
                         </div>
                     </Link>
@@ -91,11 +96,22 @@ const LeftNav = () => {
 
             <div className='notmob'>
 
-                <Link to="/">
+                <Link to="/" onClick={() => setTab("/")}>
 
-                    <div className='menus' >
-                        <HomeIcon />
-                        <h4>Home</h4>
+                    <div className='' >
+                        {
+                            tab === "/" ? (
+                                <div className='menus a1'>
+                                    <HomeIcon/>
+                                    <h4>Home</h4>
+                                </div>
+                            ) : (
+                                <div className='menus a2'>
+                                    <HomeOutlinedIcon/>
+                                    <h4>Home</h4>
+                                </div>
+                            )
+                        }
                     </div>
                 </Link>
 
@@ -105,6 +121,23 @@ const LeftNav = () => {
                         <h4>Category</h4>
                     </div>
                 </Link>
+
+
+{
+   user && user.role === "owner" ? (
+        <>
+                <Link to="/admin">
+                    <div className='menus' onClick={toggleDrawer}>
+                        <Category />
+                        <h4>Admin</h4>
+                    </div>
+                </Link>
+        
+        </>
+    ) : ""
+}
+
+
                 {user ? (
                     <>
 

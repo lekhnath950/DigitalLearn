@@ -6,13 +6,19 @@ import { createError } from "../error.js"
 
 export const signup = async (req,res,next) => {
     try {
+        const { name, email, password, role } = req.body;
+
+        const user = await User.findOne({ email });
+        if (user) {
+           return res.status(404).send("Email not available")
+        }
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt)
         const newUser = new User({...req.body, password: hash})
         console.log(req.body)
 
         await newUser.save();
-        res.status(200).send("User Created")
+        res.status(200).json("User Created")
     } catch (err) {
         // next(createError(404, "not found sorry"))
         next(err)

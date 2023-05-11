@@ -8,7 +8,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, logout } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
 
@@ -18,20 +18,29 @@ function Navbar() {
   const [dialog, setDialog] = React.useState(false)
   const [showPassword, setShowPassword] = useState(false);
 
+  const [messageVisible, setMessageVisible] = useState(true)
+
+
+  const navi = useNavigate()
+
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const dispatch = useDispatch()
+
   const handleLogin = async (e) => {
     e.preventDefault()
     dispatch(loginRequest())
     try {
-      const res = await axios.post("auth/login", { email, password })
+      const res = await axios.post("/auth/login", { email, password })
       setDialog(false)
       dispatch(loginSuccess({ user: res.data, message: res.data.message }))
     } catch (error) {
       dispatch(loginFailure({ message: error.response.data.message }))
+      setMessageVisible(true) // show message
+    setTimeout(() => setMessageVisible(false), 5000) // hide message after 5 seconds
+
     }
   }
 
@@ -44,8 +53,9 @@ function Navbar() {
     setDialog(false)
   }
 
-  const logoutt = () => {
-    dispatch(logout())
+  const logoutt = async() => {
+   await dispatch(logout())
+    navi("/")
   }
 
   const [query, setQuery] = useState("");
@@ -59,9 +69,8 @@ function Navbar() {
       const data = await response.json();
       setResults(data);
       setOpenSearch(true)
-      console.log(data)
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -104,7 +113,9 @@ function Navbar() {
             <div className='auth-right'>
               <Button variant='outlined' onClick={Dialogbox} >Login</Button>
               <div>
-                <Button variant='outlined' disabled>Sign Up</Button>
+                <Link to="/signup">
+                <Button variant='outlined' >Sign Up</Button>
+                </Link>
               </div>
             </div>
 
@@ -152,7 +163,7 @@ function Navbar() {
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </div>
 
-            {message ? message : ""}
+            { messageVisible && message ? message : ""}
             <Button variant='outlined' onClick={handleLogin} >Login</Button>
           </form>
         </DialogContent>
