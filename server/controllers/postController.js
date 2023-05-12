@@ -47,18 +47,31 @@ export const deletePost = async (req,res,next) => {
     }
 }
 
-import mongoose from "mongoose"
 
 export const getPost = async (req,res,next) => {
     try {
-        await Post.findById(req.params.id)
-        const post = await Post.find({ userId: req.params.id });
+       const post = await Post.findById(req.params.id)
         res.status(200).json(post)
+    } catch (err) {
+        next(err)
+    }
+} 
+
+export const getProfilePost = async (req,res,next) => {
+    try {
+    //    const post1 = await Post.findById(req.params.id)
+        const post = await Post.find({ userId: req.params.id });
+        // console.log(post1)
+        res.status(200).json(post)
+
         
     } catch (err) {
         next(err)
     }
 } 
+
+
+
 export const addView = async (req,res,next) => {
     try {
 
@@ -109,19 +122,30 @@ export const sub = async (req,res,next) => {
     }
 }
 
-export const getByTag = async (req,res,next) => {
 
-    const tags = req.query.tags.split(",")
-    console.log(tags)
+export const getByTag = async (req, res, next) => {
+    const tags = req.query.tags.split(',');
     try {
-
-        const post = await Post.find({tags: { $in: tags }}).limit(2);
-        res.status(200).json(post)
-        
+      const post = await Post.find({ tags: { $all: tags.map((tag) => new RegExp(tag, 'i')) } }).limit(2);
+      res.status(200).json(post);
     } catch (err) {
-        next(err)
+      next(err);
     }
-}
+  };
+  
+
+export const getTags = async (req, res, next) => {
+    try {
+      const tags = await Post.aggregate([
+        { $unwind: '$tags' },
+        { $group: { _id: { $toLower: '$tags' }, count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+      ]);
+      res.status(200).json(tags);
+    } catch (err) {
+      next(err);
+    }
+  };
 
 export const search = async (req,res,next) => {
     const query = req.query.q

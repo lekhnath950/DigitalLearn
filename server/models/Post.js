@@ -34,9 +34,10 @@ const postSchema = new mongoose.Schema({
 
     tags: {
         type: [String],
-        default: []
-    },
-
+        default: [],
+        set: (tags) => tags.map((tag) => typeof tag === 'string' ? tag.toLowerCase() : tag)
+      },
+      
     likes: {
         type: [String],
         default: []

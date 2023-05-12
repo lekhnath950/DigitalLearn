@@ -1,0 +1,44 @@
+.discussion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    height: 80%;
+    max-height: 800px;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.Disc{
+    border: 1px solid grey;
+    max-width: 350px;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.D-topic{
+    font-weight: 500;
+    box-shadow: 1px 2px 3px grey;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 4px 6px;
+}
+
+.D-reply{
+    font-size: 13px;
+}
+
+.ask{
+    width: max-content;
+    border: 1px solid black;
+}
+
+.ask input{
+    outline: none;
+    border: none;
+    height: 35px;
+    width: 200px;
+    outline-width: 1px;
+}

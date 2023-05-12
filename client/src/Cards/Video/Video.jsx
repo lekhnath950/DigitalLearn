@@ -7,12 +7,14 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import LeftNav from '../../components/Navbar/LeftNav';
 import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
+import moment from 'moment';
+import Loader from '../Loader/Loader';
 
 
 const Video = () => {
 
-  // const { user } = useSelector((state) => state.user)
-  const { currentPost } = useSelector((state) => state.postx)
+  const { user} = useSelector((state) => state.user)
+  const { currentPost, loading } = useSelector((state) => state.postx)
   const dispatch = useDispatch()
 
   const path = useLocation().pathname.split("/")[2]
@@ -33,30 +35,29 @@ const Video = () => {
       dispatch(postRequest())
       try {
         const videoRes = await axios.get(`/posts/find/${path}`) //to get video from the postid
-        const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`)  //to get the channel data
+        const channelRes = await axios.get(`/users/finds/${videoRes.data.userId}`)  //to get the channel data
         setChannel(channelRes.data)
         dispatch(postSuccess(videoRes.data))
       } catch (error) {
-
+        console.log(error)
       }
     }
     fetchData()
   }, [path, dispatch])
 
-  // const [likee, setLikee] = useState(0)
-  // const [liked,setLiked] = useState(false)
+  const [liked,setLiked] = useState(false)
 
   const likeHandle = async () => {
     await axios.put(`/users/love/${currentPost._id}`)
-
-    // if(!liked) {
-    //   setLiked(true)
-    //   setLikee(likee + 1)
-    // } else {
-    //   setLiked(false)
-    //   setLikee(likee -1)
-    // }
   }
+
+  useEffect(()=> {
+    currentPost.likes.forEach(item=> {
+      if(item === user._id ) {
+        setLiked(true)
+      }
+    })
+  },[user._id])
 
 
 
@@ -69,45 +70,59 @@ const Video = () => {
           <LeftNav />
         </div>
 
+{
+  loading && (
+      <Loader/>
+
+  )
+}
+
+
+{ currentPost && (
         <div className='video-feed' >
 
         <div onClick={OpenVideo}>
-          <img src={currentPost && currentPost.imgUrl} width={400} alt="post"/>
+          <img src={currentPost.imgUrl} width={400} alt="post"/>
         </div>
 
 
         <div className=''>
 
           <h3>
-            {currentPost && currentPost.title} 
+            {currentPost.title} 
           </h3>
-          <p>{currentPost && currentPost.desc}</p>
-          <p>{currentPost && currentPost.likes.length }</p>
-          <p>{currentPost && currentPost.likes }</p>
-          {/* <span><button onClick={likeHandle}> {liked? "unlike" :"like"} </button></span> */}
-          <span><button onClick={likeHandle}> like </button></span>
+          <p>{currentPost.desc}</p>
+          <p>{currentPost.likes.length }</p> 
+           {/* <pre>{currentPost > 0 && currentPost.likes }</pre> */}
+           {moment(currentPost.createdAt).fromNow()}
+           
+          <span><button onClick={likeHandle}> {liked? "unlike" :"like"} </button></span>
           <h6>
             posted by:  {channel.name}
           </h6>
         </div>
 
         </div>
-
+)}
 
       </div>
 
-      <Dialog open={open} onClose={closee}>
+{  
+currentPost && (
+<Dialog open={open} onClose={closee}>
         <DialogActions>
           <Button onClick={closee} variant='outlined'>close</Button>
         </DialogActions>
         <DialogContent>
           <video width="500px" controls>
-            <source src={currentPost && currentPost.videoUrl} type="video/mp4" />
+            <source src={currentPost.videoUrl} type="video/mp4" />
 
           </video>
 
         </DialogContent>
       </Dialog>
+      
+      )  }
     </div>
   )
 }

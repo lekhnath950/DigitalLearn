@@ -10,4 +10,11 @@
     /* font-size: 2rem; */
     font-weight: bold;
     margin-top: 2rem;
-  }
+}
+
+.tags-ul {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 5px;
+    list-style-type: none !important;
+}

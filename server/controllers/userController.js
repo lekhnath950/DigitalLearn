@@ -115,14 +115,12 @@ export const love = async (req,res,next) => {
             return res.status(404).json("Post not found")
         }
 
-        if(post.likes.includes(req.user.userId)){
-            console.log(req.user.id)
+        if(post.likes.includes(req.user.id)){
             const index = post.likes.indexOf(req.user.id);
             post.likes.splice(index,1)
             await post.save();
             return res.status(200).json("Post unliked")
         } else {
-            console.log(req.user.id)
             post.likes.push(req.user.id);
             await post.save();
             return res.status(200).json("Post liked")

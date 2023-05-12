@@ -9,6 +9,8 @@ import Profile from './components/Profile/Profile';
 import Admin from './components/AdminPanel/Admin';
 import { useSelector } from 'react-redux';
 import Signup from './components/Auth/Signup';
+import Tag from './components/Category/Tag';
+import Discussion from './components/Discussion/Discussion';
 
 function App() {
   const {user} = useSelector(state=> state.user)
@@ -20,6 +22,8 @@ function App() {
             <Route path='/' element={<Home />}  />
             <Route path='/category' element={<Category />}  />
             <Route path='/signup' element={<Signup />}  />
+            <Route path='/discussion' element={<Discussion />}  />
+            <Route path='/tag/:tag' element={<Tag />}  />
             {
               user && user.role === "owner" ? (
                 <Route path='/admin' element={<Admin />}  />

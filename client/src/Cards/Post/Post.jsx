@@ -12,7 +12,7 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         const fetchChannel = async () => {
-            const res = await axios.get(`/posts/find/${post.userId}`)
+            const res = await axios.get(`/posts/find/${post._id}`)
             setChannel(res.data)
         }
         fetchChannel()
@@ -40,6 +40,7 @@ const Post = ({ post }) => {
                     <FavoriteBorderIcon />
                     <p>{post.likes.length}</p>
                     <p>{channel.__v}</p>
+
                     </div>
                 </div>
 

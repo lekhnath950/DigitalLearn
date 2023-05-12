@@ -12,11 +12,9 @@ const Profile = () => {
     const [prof, setProf] = useState([])
 
     let id = user._id;
-
     useEffect(()=> {
         const fetchh = async() => {
-            const res = await axios.get(`/posts/find/${id}`)
-            console.log(res.data)
+            const res = await axios.get(`/posts/profile/${id}`)
             setProf(res.data)
         }
         fetchh()

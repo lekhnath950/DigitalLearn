@@ -171,6 +171,12 @@ const LeftNav = () => {
                     <SettingIcon />
                     <h4>Settings</h4>
                 </div>
+                <Link to="/discussion">
+                <div className='menus'>
+                    <SettingIcon />
+                    <h4>Discussion</h4>
+                </div>
+                </Link>
             </div>
 
 
