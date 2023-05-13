@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import PersonIcon from '@mui/icons-material/Person';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 const LeftNav = () => {
 
@@ -128,7 +131,7 @@ const LeftNav = () => {
         <>
                 <Link to="/admin">
                     <div className='menus' onClick={toggleDrawer}>
-                        <Category />
+                        <VerifiedUserIcon />
                         <h4>Admin</h4>
                     </div>
                 </Link>
@@ -156,7 +159,7 @@ const LeftNav = () => {
 
                         <Link to={`/profile/${id}`}>
                             <div className='menus'>
-                                <Upload />
+                                <PersonIcon />
                                 <h4>Profile</h4>
                             </div>
                         </Link>
@@ -173,7 +176,7 @@ const LeftNav = () => {
                 </div>
                 <Link to="/discussion">
                 <div className='menus'>
-                    <SettingIcon />
+                    <PeopleAltIcon />
                     <h4>Discussion</h4>
                 </div>
                 </Link>

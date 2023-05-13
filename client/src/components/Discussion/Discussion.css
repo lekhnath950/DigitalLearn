@@ -1,21 +1,35 @@
 .discussion {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 800px;
+    width: 900px;
     height: 80%;
     max-height: 800px;
-    margin: auto;
-    margin-top: 70px;
+    margin:auto auto;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 120px;
+
+}
+
+@media screen and (max-width: 767px) {
+    .discussion {
+      width: 99%; 
+      margin: 120px 0px; 
+    }
+  }
+
+
+.addDisc{
+    position: absolute;
+    top:10;
+    right: 0;
+    z-index: 10;
 }
 
 .Disc{
     border: 1px solid grey;
-    max-width: 350px;
+    max-width: 600px;
     margin: 2px;
     border-radius: 5px;
+    padding: 0 10px;
 }
 
 .D-topic{
@@ -26,8 +40,46 @@
     padding: 4px 6px;
 }
 
+
+.D-info{
+    display: flex;
+    justify-content: space-between;
+    margin: 1px;
+    padding: 1px 1px;
+    margin-top: -19px;
+    font-size: 12px;
+}
+
+.D-info p{
+    color: grey;
+    line-height: 0;
+
+}
+
 .D-reply{
     font-size: 13px;
+}
+
+.D-rep{
+    border: 1px solid grey;
+    width: max-content;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    border-radius: 5px;
+}
+
+.D-rep input{
+    border: none;
+    outline: none;
+}
+
+.D-rep button{
+    outline: none;
+    border: none;
+    background: none;
+    align-items: center;
 }
 
 .ask{
@@ -41,4 +93,37 @@
     height: 35px;
     width: 200px;
     outline-width: 1px;
+}
+
+.D-replies{
+    margin: 5px;
+    border-radius: 5px;
+    padding: 0 2px;
+    /* box-shadow: 1px 1px 1px grey; */
+    border: 1px solid rgb(235, 210, 210);
+}
+
+.D-replyName{
+    box-shadow: 1px 1px 1px grey;
+    width: max-content;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 1px;
+    /* border: 1px solid grey; */
+}
+
+.D-replied{
+    text-align: justify;
+}
+
+.D-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: -20px;
+}
+
+.D-footer p{
+    color: grey;
 }

@@ -3,7 +3,8 @@ import mongoose from "mongoose"
 const discussionSchema = new mongoose.Schema({
     userId: {
         type: String,
-        required: true
+        required: true,
+        ref:'User'
     },
 
     topic: {
@@ -15,7 +16,8 @@ const discussionSchema = new mongoose.Schema({
         {
             userId: {
                 type: String,
-                required: true
+                required: true,
+                ref:'User'
             },
             rep: {
                 type: String,

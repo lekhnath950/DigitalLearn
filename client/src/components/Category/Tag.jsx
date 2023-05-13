@@ -16,7 +16,7 @@ const Tag = () => {
             setPostT(res.data)
         }
         fetchh();
-    },[])
+    },[tag])
   return (
     <div>
         <div>

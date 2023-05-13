@@ -15,8 +15,8 @@ const Post = ({ post }) => {
             const res = await axios.get(`/posts/find/${post._id}`)
             setChannel(res.data)
         }
-        fetchChannel()
-    }, [post.userId])
+        fetchChannel() 
+    }, [post._id])
 
 
     return (

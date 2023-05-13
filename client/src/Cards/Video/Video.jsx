@@ -57,7 +57,7 @@ const Video = () => {
         setLiked(true)
       }
     })
-  },[user._id])
+  },[currentPost.likes, user._id])
 
 
 
