@@ -31,7 +31,7 @@ function Fav(props) {
     <div style={{marginTop:100}}>
         <LeftNav/>
     </div>
-    <div style={{marginLeft:100}}>
+    <div style={{marginLeft:100}} className='content-feed'>
       {likes && likes.map((like) => (
         <Post key={like._id} post={like}/>
       ))}

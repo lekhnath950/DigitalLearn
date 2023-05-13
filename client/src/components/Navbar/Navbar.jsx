@@ -54,7 +54,8 @@ function Navbar() {
   }
 
   const logoutt = async() => {
-   await dispatch(logout())
+    await axios.post("/auth/logout")
+    dispatch(logout())
     navi("/")
   }
 

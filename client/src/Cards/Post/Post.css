@@ -158,17 +158,6 @@
     gap: 5px;
 }
 
-div p {
-    text-overflow: ellipsis;
-    text-align: justify;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-
-}
-
 .imggg{
     padding: 5px 1px;
 }

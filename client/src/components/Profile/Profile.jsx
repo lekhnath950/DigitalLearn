@@ -28,7 +28,7 @@ const Profile = () => {
             <LeftNav />
         </div>
 
-        <div className="profile">
+        <div className="profile content-feed">
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>
             <p>jpt: {user.__v}</p>
