@@ -7,10 +7,7 @@
 
 .content-feed{
     display: grid;
-    /* grid-template-columns: 30vw 30vw; */
     gap: 5vw;
-    margin-left: 20vw;
-
 }
 
 .content-feed div p {

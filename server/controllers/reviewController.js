@@ -61,6 +61,28 @@ export const getDisc = async (req,res,next) => {
     }
 } 
 
+
+export const getDiscLimit = async (req, res, next) => {
+    const { page = 1, limit = 3 } = req.query; // Set default page to 1 and limit to 5 discussions per page
+  
+    try {
+      const count = await Discussion.countDocuments(); // Get total count of discussions in the database
+      const dis = await Discussion.find().sort({ createdAt: 'desc' })
+        .populate("userId reply.userId")
+        .limit(limit) // Limit the number of discussions to the specified limit
+        .skip((page - 1) * limit); // Skip the discussions that have already been loaded
+  
+      res.status(200).json({
+        totalPages: Math.ceil(count / limit), // Calculate the total number of pages
+        currentPage: page, // Set the current page
+        discussions: dis, // Set the discussions for the current page
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+  
+
 export const getUserDisc = async (req,res,next) => {
     try {
         const dis = await Discussion.findById(req.params.id)
@@ -126,7 +148,7 @@ export const deleteRep = async (req,res,next) => {
             { $pull: { reply: { _id: req.params.replyId } } },
             { new: true }
         );
-        res.status(200).json(discussion);
+        res.status(200).json("Deleted");
     } catch (error) {
         next(error);
     }

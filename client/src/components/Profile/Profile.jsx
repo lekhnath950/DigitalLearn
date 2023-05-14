@@ -31,7 +31,10 @@ const Profile = () => {
         <div className="profile content-feed">
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>
-            <p>jpt: {user.__v}</p>
+
+            {prof ? (
+                <p>Total Post:{prof.length}</p>
+            ): ""}
 
             {prof && prof.map((postq)=> (
                 <>

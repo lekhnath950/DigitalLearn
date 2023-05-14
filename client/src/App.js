@@ -23,6 +23,7 @@ function App() {
             <Route path='/category' element={<Category />}  />
             <Route path='/signup' element={<Signup />}  />
             <Route path='/discussion' element={<Discussion />}  />
+            
             <Route path='/tag/:tag' element={<Tag />}  />
             {
               user && user.role === "owner" ? (

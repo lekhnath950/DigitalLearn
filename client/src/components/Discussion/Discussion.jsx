@@ -3,7 +3,7 @@ import './Discussion.css'
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Snackbar } from '@mui/material'
 import { useSelector } from 'react-redux'
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -13,16 +13,28 @@ import SendIcon from '@mui/icons-material/Send';
 const Discussion = () => {
 
   const { user } = useSelector(state => state.user)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const [dis, setDis] = useState([]);
-  useEffect(() => {
-    const fetchh = async () => {
-      const res = await axios.post("/review/getdisc");
-      setDis(res.data);
-      console.log(res.data)
+
+  useEffect(()=> {
+    const fetchDiscussions = async () => {
+      try {
+        const response = await axios.post(`/review/discussion?page=${currentPage}`);
+        console.log(response)
+        setDis([...dis, ...response.data.discussions]); // Append new discussions to the existing discussions
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    fetchh();
-  }, []);
+    fetchDiscussions()
+  },[currentPage])
+
+  const loadMore = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
   const [topic, setTopic] = useState("");
   const [replyInputs, setReplyInputs] = useState({});
@@ -62,6 +74,9 @@ const Discussion = () => {
 
 
   const [open, setOpen] = useState(false)
+  const [msgOpen, setMsgOpen] = useState(false)
+  const [msg, setMsg] = useState(null)
+
   const handleOpen = () => {
     setOpen(!open)
   }
@@ -76,7 +91,10 @@ const Discussion = () => {
 
   const deleteReply = async (id, replyid) => {
     try {
-      await axios.delete(`/review/${id}/replies/${replyid}`)
+      const res =  await axios.delete(`/review/${id}/replies/${replyid}`)
+      setMsg(res.data)
+      setMsgOpen(true)
+      console.log(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -117,7 +135,7 @@ const Discussion = () => {
         <div>
           {dis &&
             dis.map((item) => (
-              <div className="Disc" key={item._id}>
+              <div className="Disc" >
                 <h4 className="D-topic">{item.topic}</h4>
                 <div className='D-info'>
                   <p><span>Posted by:</span>{user && item && (item.userId._id === user._id) ? "you" : item.userId.name}</p>
@@ -132,7 +150,7 @@ const Discussion = () => {
 
 
                 <form onSubmit={(e) => handleReply(e, item._id)} className='D-rep' >
-                  <input value={replyInputs[item._id] || ""} type="text" placeholder={user? "Add a Reply": "Login to add a reply"} onChange={(e) => handleReplyChange(e, item._id)} />
+                  <textarea maxLength={1000} value={replyInputs[item._id] || ""} type="text" placeholder={user? "Add a Reply": "Login to add a reply"} onChange={(e) => handleReplyChange(e, item._id)} />
                   <button disabled={!user}><SendIcon fontSize='small' /></button>
                 </form>
 
@@ -164,6 +182,13 @@ const Discussion = () => {
             ))}
         </div>
       </div>
+
+            {currentPage < totalPages && (
+            <button style={{'marginLeft':'50vw'}} onClick={loadMore}>Load more</button>
+            )}
+
+            <Snackbar open={msgOpen} message={msg && msg} autoHideDuration={1000} />
+
     </div>
   );
 };

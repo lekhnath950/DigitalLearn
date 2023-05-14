@@ -19,7 +19,6 @@ const Home = () => {
     const fetchh = async () => {
       const res = await axios.get("/posts/random")
       setPost(res.data)
-      console.log(res.data)
     }
 
     fetchh();

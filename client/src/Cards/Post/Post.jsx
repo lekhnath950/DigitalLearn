@@ -39,7 +39,7 @@ const Post = ({ post }) => {
                     <div className='iii'>
                     <FavoriteBorderIcon />
                     <p>{post.likes.length}</p>
-                    <p>{channel.__v}</p>
+                    {/* <p>{channel.__v}</p> */}
 
                     </div>
                 </div>

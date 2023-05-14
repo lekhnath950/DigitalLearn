@@ -64,8 +64,9 @@ a {
 
 
 .menu-main {
-    background-color: #F5F5F5;
-    width: 180px;
+    /* background-color: #F5F5F5; */
+    background-color: white;
+    width: 140px;
     height: 100vh;
     position: fixed;
     left: 0;
@@ -74,17 +75,18 @@ a {
 }
 
 .menus {
-    /* border: 1px solid grey; */
-    box-shadow: 1px 1px 2px black;
     display: flex;
-    /* margin-left: 10px; */
     align-items: center;
     gap: 5px;
     line-height: 1px;
-    
-    padding: 12px;
-    /* border-radius: 4px; */
+    padding: 5px 12px;
+    /* border-bottom: 0.009px solid grey; */
     transition: background-color 0.3s ease;
+}
+
+.menus h4{
+    font-size: 15px;
+    font-weight: 550;
 }
 
 
@@ -94,7 +96,7 @@ a {
     background-color: #f2f2f2;
     cursor: pointer;
     color: darkblue;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 4px 1px 8px rgba(0, 0, 0, 0.2); */
 }
 
 
@@ -170,4 +172,15 @@ a {
 
 .a1{
     background-color: white;
+}
+
+.a2{
+    color: darkblue;
+    /* border-bottom: 1px solid grey; */
+}
+
+
+
+.navbar-home{
+    width: 140px;
 }
