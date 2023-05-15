@@ -83,6 +83,7 @@ const Discussion = () => {
 
   const deleteHandler = async (id) => {
     try {
+      await window.confirm("Want to delete?")
       await axios.delete(`/review/Disc/${id}`)
     } catch (error) {
       console.log(error.response.data.message)
@@ -91,10 +92,10 @@ const Discussion = () => {
 
   const deleteReply = async (id, replyid) => {
     try {
+      await window.confirm("want to delete?")
       const res =  await axios.delete(`/review/${id}/replies/${replyid}`)
       setMsg(res.data)
       setMsgOpen(true)
-      console.log(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -142,7 +143,7 @@ const Discussion = () => {
                   <p>{moment(item.createdAt).fromNow()}</p>
                   {
                     user && item && (item.userId._id === user._id) ? (
-                      <span onClick={() => deleteHandler(item._id, item.userId)}><DeleteIcon /></span>
+                      <span onClick={() => deleteHandler(item._id, item.userId)}><DeleteIcon fontSize="small"/></span>
                     ) : null
                   }
                 </div>
@@ -151,7 +152,7 @@ const Discussion = () => {
 
                 <form onSubmit={(e) => handleReply(e, item._id)} className='D-rep' >
                   <textarea maxLength={1000} value={replyInputs[item._id] || ""} type="text" placeholder={user? "Add a Reply": "Login to add a reply"} onChange={(e) => handleReplyChange(e, item._id)} />
-                  <button disabled={!user}><SendIcon fontSize='small' /></button>
+                  <button disabled={!user}><SendIcon fontSize="small" /></button>
                 </form>
 
                 { item &&
@@ -167,7 +168,7 @@ const Discussion = () => {
                           <p>{moment(replyItem.time).fromNow()}</p>
                           {
                             user && replyItem && (replyItem.userId._id === user._id) ? (
-                              <span onClick={() => deleteReply(item._id, replyItem._id)}><DeleteIcon /></span>
+                              <span onClick={() => deleteReply(item._id, replyItem._id)}><DeleteIcon fontSize="small"/></span>
                             ) : ""
                           }
 

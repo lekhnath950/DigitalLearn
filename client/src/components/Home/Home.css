@@ -8,6 +8,8 @@
 .content-feed{
     display: grid;
     gap: 5vw;
+    margin-left: 130px;
+    margin-top: 20px;
 }
 
 .content-feed div p {
@@ -18,6 +20,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
 
 .hh{
     margin-left: 400px;

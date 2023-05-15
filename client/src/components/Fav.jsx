@@ -24,7 +24,7 @@ function Fav(props) {
   return (
     <>
 
-
+<div className='main-home' >
     <div>
         <Navbar/>
     </div>
@@ -35,6 +35,7 @@ function Fav(props) {
       {likes && likes.map((like) => (
         <Post key={like._id} post={like}/>
       ))}
+    </div>
     </div>
     </>
   );

@@ -51,14 +51,15 @@ const Video = () => {
     await axios.put(`/users/love/${currentPost._id}`)
   }
 
-  useEffect(()=> {
-    currentPost.likes.forEach(item=> {
-      if(item === user._id ) {
-        setLiked(true)
-      }
-    })
-  },[currentPost.likes, user._id])
-
+  useEffect(() => {
+    if (user) {
+      currentPost.likes.forEach((item) => {
+        if (item === user._id) {
+          setLiked(true);
+        }
+      });
+    }
+  }, [currentPost.likes, user]);
 
 
   return (

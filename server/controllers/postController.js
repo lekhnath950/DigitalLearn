@@ -38,7 +38,7 @@ export const deletePost = async (req,res,next) => {
         const video = await Post.findById(req.params.id)
         if(!video) return next(createError(404,"Post not found"))
         if(req.user.id === video.userId) {
-            await Post.findByIdAndDelete(req.params.id);
+             await Post.findByIdAndDelete(req.params.id);
             res.status(200).json("The post has been deleted");
         }
         
