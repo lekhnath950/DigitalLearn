@@ -54,12 +54,28 @@ export const createDisc = async (req,res,next) => {
 
 export const getDisc = async (req,res,next) => {
     try {
-        const dis = await Discussion.find().populate("userId reply.userId");
+        const dis = await Discussion.find().sort({ createdAt: 'desc' }).populate("userId reply.userId");
         res.status(200).json(dis)
     } catch (error) {
         next(error)
     }
 } 
+
+export const discSearch = async (req, res, next) => {
+    try {
+        const { search } = req.query;
+
+        const disc = await Discussion.find({
+            $or: [
+                { topic: { $regex: search, $options: 'i' } },
+                { 'reply.rep': { $regex: search, $options: 'i' } },
+            ]
+        }).populate('userId reply.userId')
+        res.status(200).json(disc)
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 export const getDiscLimit = async (req, res, next) => {
@@ -70,8 +86,8 @@ export const getDiscLimit = async (req, res, next) => {
       const dis = await Discussion.find().sort({ createdAt: 'desc' })
         .populate("userId reply.userId")
         .limit(limit) // Limit the number of discussions to the specified limit
-        .skip((page - 1) * limit); // Skip the discussions that have already been loaded
-  
+        .skip((page - 1) * limit) // Skip the discussions that have already been loaded
+        .sort({ createdAt: 'desc' })
       res.status(200).json({
         totalPages: Math.ceil(count / limit), // Calculate the total number of pages
         currentPage: page, // Set the current page

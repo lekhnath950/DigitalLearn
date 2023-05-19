@@ -146,9 +146,10 @@ a {
 @media screen and (max-width: 500px) {
   .mobile {
     display: block;
-    /* z-index: 20000000; */
     margin-top: 14%;
   }
+
+
 
   .notmob{
     display: none;
@@ -169,6 +170,8 @@ a {
 
 .a23 svg{
     fill: black;
+    position: fixed;
+    z-index: 10;
 }
 
 .a1{
@@ -184,4 +187,35 @@ a {
 
 .navbar-home{
     width: 140px;
+}
+
+
+
+@media only screen and (max-width:500px) {
+
+    .Navbar-search{
+        margin-left: 10px;
+        padding: 1px 5px;
+    }
+
+    .searchbar{
+        width: 40px;
+        height: 10px;
+    }
+
+    .searchbar:focus{
+        width: 50px;
+    }
+
+    .auth button{
+        font-size: 12px;
+        line-height: 1;
+        padding: 4px 1px;
+    }
+
+    .aa h3{
+        font-size: 12px;
+        font-weight: 400;
+        margin-left: 20px;
+    }
 }

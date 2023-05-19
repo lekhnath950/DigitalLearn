@@ -116,9 +116,7 @@ const Menubar = () => {
 				}
 
 
-				{user ? (
-					<>
-
+{user && (user.role === "admin" || user.role ==="owner") ? (
 						<Link to="/upload">
 
 							{
@@ -136,6 +134,13 @@ const Menubar = () => {
 								)
 							}
 						</Link>
+
+) :" "
+ }
+
+				{user  ? (
+					<>
+
 
 
 						<Link to={`/fav/${id}`}>

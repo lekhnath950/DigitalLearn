@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
+import './auth.css'
 
 const Signup = () => {
 
@@ -32,7 +33,7 @@ const Signup = () => {
     <div>
         <LeftNav/>
     </div>
-    <div style={{'margin':200}}>
+    <div className="signup-container">
         <h1>Register here</h1>
     <form onSubmit={submitHandler}>
         <input type="text" placeholder='name' onChange={(e)=> setName(e.target.value)} required/> <br/>

@@ -119,11 +119,17 @@ export const love = async (req,res,next) => {
             const index = post.likes.indexOf(req.user.id);
             post.likes.splice(index,1)
             await post.save();
-            return res.status(200).json("Post unliked")
+            return res.status(200).json({
+                success: true,
+                message: "Post Unliked"
+            })
         } else {
             post.likes.push(req.user.id);
             await post.save();
-            return res.status(200).json("Post liked")
+            return res.status(200).json({
+                success: true,
+                message: "Post Liked"
+            })
         }
 
     } catch (error) {

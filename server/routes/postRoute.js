@@ -1,5 +1,5 @@
 import express from "express"
-import { addPost, addView, deletePost, getByTag, getPost, getProfilePost, getTags, random, search, sub, test, trend, updatePost } from "../controllers/postController.js";
+import { addPost, addView, deletePost, getByTag, getPost, getProfilePost, getTags, getTagsPost, random, search, sub, test, trend, updatePost } from "../controllers/postController.js";
 import { verifyToken } from "../verify.js";
 
 const router = express.Router()
@@ -18,5 +18,6 @@ router.get("/tags", getByTag)
 router.get("/tag", getTags)
 router.get("/search", search)
 router.get("/sub", verifyToken, sub) 
+router.get("/tags/:id", getTagsPost);
 
 export default router;

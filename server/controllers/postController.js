@@ -1,6 +1,7 @@
 import { createError } from "../error.js"
 import Post from "../models/Post.js"
 import User from "../models/User.js"
+import mongoose from "mongoose"
 
 export const test = (req,res) => {
     res.json("Hi there")
@@ -146,6 +147,30 @@ export const getTags = async (req, res, next) => {
       next(err);
     }
   };
+
+  export const getTagsPost = async (req, res, next) => {
+    try {
+      const post = req.params.id;
+      console.log(post)
+  
+      const tags = await Post.aggregate([
+        { $match: { _id:  mongoose.Types.ObjectId(post) } }, // Filter posts based on post ID
+        { $unwind: "$tags" },
+        {
+            $group: {
+              _id: post,
+              tags: { $addToSet: "$tags" },
+              count: { $sum: 1 }
+            }
+          },
+        { $sort: { count: -1 } },
+      ]);
+      console.log("hi")
+      res.status(200).json(tags);
+    } catch (err) {
+      next(err);
+    }
+  };  
 
 export const search = async (req,res,next) => {
     const query = req.query.q

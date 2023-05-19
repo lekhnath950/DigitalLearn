@@ -2,13 +2,15 @@ import axios from 'axios'
 import './video.css'
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
-import { postRequest, postSuccess } from '../../redux/postSlice';
+import { likeFailure, likeRequest, likeSuccess, postRequest, postSuccess } from '../../redux/postSlice';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar';
 import LeftNav from '../../components/Navbar/LeftNav';
-import { Button, Dialog, DialogActions, DialogContent } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, Tooltip } from '@mui/material';
 import moment from 'moment';
 import Loader from '../Loader/Loader';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 const Video = () => {
@@ -47,19 +49,44 @@ const Video = () => {
 
   const [liked,setLiked] = useState(false)
 
-  const likeHandle = async () => {
+  const likeHandle1 = async () => {
     await axios.put(`/users/love/${currentPost._id}`)
   }
 
+    const likeHandle = async () => {
+      dispatch(likeRequest());
+      try {
+        await axios.put(`/users/love/${currentPost._id}`);
+        if (liked) {
+          setLiked(false);
+        } else {
+          setLiked(true);
+        }
+        dispatch(likeSuccess('Post Liked'));
+        const videoRes = await axios.get(`/posts/find/${path}`) //to get video from the postid
+        const channelRes = await axios.get(`/users/finds/${videoRes.data.userId}`)  //to get the channel data
+        setChannel(channelRes.data)
+        dispatch(postSuccess(videoRes.data))
+      } catch (error) {
+        console.log(error);
+        dispatch(likeFailure('Failed to like the post'));
+      }
+    };
+  
+  // useEffect(()=> {
+  //   likeHandle();
+  // },[currentPost._id])
+ 
+
   useEffect(() => {
     if (user) {
-      currentPost.likes.forEach((item) => {
+      currentPost?.likes.forEach((item) => {
         if (item === user._id) {
           setLiked(true);
         }
       });
     }
-  }, [currentPost.likes, user]);
+  }, [currentPost?.likes, user]);
 
 
   return (
@@ -82,25 +109,26 @@ const Video = () => {
 { currentPost && (
         <div className='video-feed' >
 
-        <div onClick={OpenVideo}>
-          <img src={currentPost.imgUrl} width={400} alt="post"/>
+        <div  className='v-top'>
+          <img onClick={OpenVideo} src={currentPost.imgUrl} width={400} alt="post"/> <br/>
+          <Tooltip title="Add to Favorite">
+          <span><button onClick={likeHandle}> {liked? <FavoriteIcon style={{'color':'red'}}/> :<FavoriteBorderIcon/>} </button></span>
+          </Tooltip>
         </div>
 
 
-        <div className=''>
+        <div className='v-info'>
 
-          <h3>
-            {currentPost.title} 
-          </h3>
-          <p>{currentPost.desc}</p>
-          <p>{currentPost.likes.length }</p> 
-           {/* <pre>{currentPost > 0 && currentPost.likes }</pre> */}
-           {moment(currentPost.createdAt).fromNow()}
+         
+        <h3>{currentPost.title} </h3>
+        <div className='v-data'>
+        <p>posted by:  {channel.name}</p>
+        <p>{moment(currentPost.createdAt).fromNow()}</p>
+        </div>
+
+
+          <p className='v-desc'>{currentPost.desc}</p>
            
-          <span><button onClick={likeHandle}> {liked? "unlike" :"like"} </button></span>
-          <h6>
-            posted by:  {channel.name}
-          </h6>
         </div>
 
         </div>

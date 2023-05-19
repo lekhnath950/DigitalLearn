@@ -46,7 +46,7 @@ export const login = async (req,res,next) => {
         const {password, ...others} = user._doc
         res.cookie("access_token", token,
         {
-            expires: new Date(Date.now()+ 90* 24* 60* 60* 1000),
+            expires: new Date(Date.now()+ 900* 24* 60* 60* 1000),
             httpOnly: true
         }).status(200).json(others)
     } catch (err) {

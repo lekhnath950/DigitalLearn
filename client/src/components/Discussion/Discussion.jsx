@@ -1,43 +1,50 @@
+import { discSuccess } from '../../redux/discSlice';
 import axios from 'axios'
 import './Discussion.css'
 import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Snackbar } from '@mui/material'
-import { useSelector } from 'react-redux'
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch, useSelector } from 'react-redux'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import moment from 'moment'
-import SendIcon from '@mui/icons-material/Send';
+import Disc from './Disc'
+import Search from '@mui/icons-material/Search'
 
 const Discussion = () => {
 
-  const { user } = useSelector(state => state.user)
+  const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const [dis, setDis] = useState([]);
+  const [open, setOpen] = useState(false)
+  const [msgOpen, setMsgOpen] = useState(false)
+  const [msg, setMsg] = useState(null)
 
-  useEffect(()=> {
+  const { discus } = useSelector(state => state.discc)
+
+
+  useEffect(() => {
     const fetchDiscussions = async () => {
       try {
         const response = await axios.post(`/review/discussion?page=${currentPage}`);
-        console.log(response)
-        setDis([...dis, ...response.data.discussions]); // Append new discussions to the existing discussions
+        dispatch(discSuccess([...discus, ...response.data.discussions]));
         setTotalPages(response.data.totalPages);
+
+
       } catch (error) {
         console.log(error);
       }
     };
     fetchDiscussions()
-  },[currentPage])
+  }, [currentPage])
+
 
   const loadMore = () => {
     setCurrentPage(currentPage + 1);
   };
 
   const [topic, setTopic] = useState("");
-  const [replyInputs, setReplyInputs] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,56 +57,30 @@ const Discussion = () => {
         },
       }
     );
+    setOpen(!open)
+
+    const res = await axios.post("/review/getdisc")
+    dispatch(discSuccess(res.data))
   };
-
-  const handleReplyChange = (e, id) => {
-    setReplyInputs((prevInputs) => ({
-      ...prevInputs,
-      [id]: e.target.value,
-    }));
-  };
-
-  const handleReply = async (e, id) => {
-    e.preventDefault();
-    await axios.post(
-      `/review/addReply/${id}`,
-      { rep: replyInputs[id] },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  };
-
-
-  const [open, setOpen] = useState(false)
-  const [msgOpen, setMsgOpen] = useState(false)
-  const [msg, setMsg] = useState(null)
 
   const handleOpen = () => {
     setOpen(!open)
   }
 
-  const deleteHandler = async (id) => {
-    try {
-      await window.confirm("Want to delete?")
-      await axios.delete(`/review/Disc/${id}`)
-    } catch (error) {
-      console.log(error.response.data.message)
-    }
-  }
+  const [query, setQuery] = useState("")
+  const [result, setResult] = useState([])
 
-  const deleteReply = async (id, replyid) => {
+  const searchHandle = async (e) => {
+    e.preventDefault();
     try {
-      await window.confirm("want to delete?")
-      const res =  await axios.delete(`/review/${id}/replies/${replyid}`)
-      setMsg(res.data)
-      setMsgOpen(true)
+      const res = await axios.get(`/review/disc/search?search=${query}`)
+      setResult(res.data)
+      dispatch(discSuccess(res.data))
     } catch (error) {
       console.log(error)
     }
   }
+
 
   return (
     <div>
@@ -111,6 +92,24 @@ const Discussion = () => {
       </div>
 
       <div className="discussion">
+
+        <div>
+          <form onSubmit={searchHandle} className='d-search'>
+            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder='search' />
+            <button><Search /></button>
+          </form>
+        </div>
+
+
+
+        {
+          result && result.map(disc => (
+            <>
+              <Disc key={disc._id} disc={disc} reply={disc.reply} />
+            </>
+          ))
+        }
+
 
         <div className="addDisc">
           <Button onClick={handleOpen}><AddCircleIcon />Create Discussion</Button>
@@ -133,62 +132,21 @@ const Discussion = () => {
           </Dialog>
         </div>
 
-        <div>
-          {dis &&
-            dis.map((item) => (
-              <div className="Disc" >
-                <h4 className="D-topic">{item.topic}</h4>
-                <div className='D-info'>
-                  <p><span>Posted by:</span>{user && item && (item.userId._id === user._id) ? "you" : item.userId.name}</p>
-                  <p>{moment(item.createdAt).fromNow()}</p>
-                  {
-                    user && item && (item.userId._id === user._id) ? (
-                      <span onClick={() => deleteHandler(item._id, item.userId)}><DeleteIcon fontSize="small"/></span>
-                    ) : null
-                  }
-                </div>
+        {
+          discus && discus.map(disc => (
+            <>
+              <Disc key={disc.topic} disc={disc} reply={disc.reply} currentPage={currentPage} />
+            </>
+          ))
+        }
 
-
-
-                <form onSubmit={(e) => handleReply(e, item._id)} className='D-rep' >
-                  <textarea maxLength={1000} value={replyInputs[item._id] || ""} type="text" placeholder={user? "Add a Reply": "Login to add a reply"} onChange={(e) => handleReplyChange(e, item._id)} />
-                  <button disabled={!user}><SendIcon fontSize="small" /></button>
-                </form>
-
-                { item &&
-                  item.reply.map((replyItem) => (
-                    <>
-                      <div className='D-replies'>
-                        <div className="D-reply" key={replyItem._id}>
-                          <p className='D-replyName'>Replied by {user && item && (replyItem.userId._id === user._id) ? "you" : replyItem.userId.name}</p>
-                          <p className="D-replied">{replyItem.rep}</p>
-                        </div>
-
-                        <div className='D-footer'>
-                          <p>{moment(replyItem.time).fromNow()}</p>
-                          {
-                            user && replyItem && (replyItem.userId._id === user._id) ? (
-                              <span onClick={() => deleteReply(item._id, replyItem._id)}><DeleteIcon fontSize="small"/></span>
-                            ) : ""
-                          }
-
-                        </div>
-
-
-                      </div>
-                    </>
-                  ))}
-                {item.reply.length === 0 ? "No Reply" : ""}
-              </div>
-            ))}
-        </div>
       </div>
 
-            {currentPage < totalPages && (
-            <button style={{'marginLeft':'50vw'}} onClick={loadMore}>Load more</button>
-            )}
+      {currentPage < totalPages && (
+        <button style={{ 'marginLeft': '50vw' }} onClick={loadMore}>Load more</button>
+      )}
 
-            <Snackbar open={msgOpen} message={msg && msg} autoHideDuration={1000} />
+      <Snackbar open={msgOpen} message={msg && msg} autoHideDuration={1000} />
 
     </div>
   );

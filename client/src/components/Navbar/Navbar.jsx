@@ -9,6 +9,8 @@ import { useDispatch } from 'react-redux';
 import { loginFailure, loginRequest, loginSuccess, logout } from '../../redux/userSlice';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Post from '../../Cards/Post/Post'
+
 
 function Navbar() {
 
@@ -140,10 +142,12 @@ function Navbar() {
                   <p>{result.desc}</p>
                   <p>
                     <Link to={`/posts/${result._id}`} >Play Video </Link>
+                <Post post={result} />
 
                   </p>
                   <hr/>
                 </div>))) : "No content Available"}
+
 
 
           </div>

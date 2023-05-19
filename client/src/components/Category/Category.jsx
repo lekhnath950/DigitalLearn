@@ -25,13 +25,17 @@ useEffect(()=> {
   fetchh();
 },[])
 
-  useEffect(() => {
-    const fetchh = async () => {
-      const res = await axios.get("/posts/trend")
-      setPost(res.data)
-    }
-    fetchh();
-  }, [])
+useEffect(() => {
+  const fetchh = async () => {
+    const res = await axios.get("/posts/trend")
+    setPost(res.data)
+  }
+  fetchh();
+}, [])
+
+
+
+
   return (
     <div>
 
@@ -66,9 +70,12 @@ useEffect(()=> {
 
           <div className='content-feed'>
             {post.slice((page - 1) * 2, page * 2).map((posts) => (
-              <Post key={posts.title} post={posts} />
+
+                <Post key={posts.title} post={posts} />
+
             ))}
           </div>
+
 
           <Pagination count={Math.ceil(post.length / 2)} page={page} onChange={handleChange} className='hh' />
 

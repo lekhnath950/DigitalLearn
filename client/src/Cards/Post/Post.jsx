@@ -6,11 +6,12 @@ import moment from 'moment'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material'
 import { useSelector } from 'react-redux'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
 const Post = ({ post }) => {
 
-    const {user} = useSelector(state=> state.user)
+    const {user} = useSelector(state=> state.user) 
 
     const [channel, setChannel] = useState({})
     const [open, setOpen] = useState(false)
@@ -39,7 +40,7 @@ const Post = ({ post }) => {
                 title: editTitle,
                 desc: editDesc
             }
-           const post = await axios.put(`/posts/${pid}`,updatePost)
+           await axios.put(`/posts/${pid}`,updatePost)
            setOpen(false)
            setEditTitle('')
            setEditDesc('')
@@ -60,9 +61,12 @@ const Post = ({ post }) => {
         await axios.delete(`/posts/${pid}`)
     }
 
-
+    const [isOpen, setIsOpen] = useState(false);
+    const handleDropdownToggle = () => {
+        setIsOpen(!isOpen);
+      };
     return (
-        <div>
+        <div> 
 
 
             <div className='post'>
@@ -74,26 +78,32 @@ const Post = ({ post }) => {
                     </div>
 
                     <div className='text-post'>
-                        <h3>{post.title} <span style={{fontSize:10}}> [{moment(post.createdAt).fromNow()}] </span></h3>
+                        <h3>{post.title} <span> [{moment(post.createdAt).fromNow()}]  </span></h3>
+
+
                         <p>{post.desc}</p>
                     </div>
 
                     <div className='iii'>
                     <FavoriteBorderIcon />
                     <p>{post.likes.length}</p>
-
+                    <button onClick={handleDropdownToggle}><MoreHorizIcon/></button>
                     {
                         user && user._id === post.userId &&
-                        <>
-                    <button onClick={handleEditPost}>edit post</button>
-                    <button onClick={()=> deleteHandler(post._id)}>delete post</button>
-                    </>
-                    }
+                        
+                            isOpen && (
+                                <>
+                                <button onClick={handleEditPost}>edit post</button>
+                                <button onClick={()=> deleteHandler(post._id)}>delete post</button>
+                                </>
+                                )
+                            
+                        }  
                     {/* <p>{channel.__v}</p> */}
 
                     </div>
 
-                    <Dialog open={open}>
+                    <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>
 
                         </DialogTitle>

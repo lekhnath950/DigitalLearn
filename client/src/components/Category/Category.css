@@ -16,3 +16,16 @@
     gap: 5px;
     list-style-type: none !important;
 }
+
+
+@media only screen and (max-width:500px){
+    .tags-ul{
+        grid-template-columns: auto auto;
+        gap:2px;
+        display: none;
+    }
+
+    .tags-ul button{
+        font-size: 10px;
+    }
+}

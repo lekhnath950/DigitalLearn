@@ -8,7 +8,7 @@
     display: flex;
     height: 200px;
     overflow-y: hidden;
-    gap: 5px;
+    gap: 2px;
 }
 
 
@@ -51,9 +51,9 @@
     margin-bottom: 16px;
 }
 
-.post-title {
-    font-size: 16px;
-    font-weight: bold;
+.text-post h3{
+    font-size: 14px;
+    font-weight:600;
     margin: 0;
     padding: 16px;
     display: flex;
@@ -62,11 +62,11 @@
     background-color: #ddd;
     border-radius: 4px 4px 0 0;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
 }
 
-.post-title:hover {
+.text-post:hover {
     background-color: #ccc;
+    transition: background-color 0.2s ease-in-out;
 }
 
 .post-content {
