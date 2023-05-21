@@ -3,25 +3,40 @@
     height: 80%;
     max-height: 800px;
     margin: auto auto;
-    /* display: flex; */
-    /* justify-content: flex-end; */
     margin-top: 120px;
 
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (min-width: 767px) {
     .discussion {
-        width: 99%;
-        margin: 120px 0px;
+        width: 75vw;
+        margin-top: 120px;
+        margin-left: 25vw;
+    }
+}
+
+
+@media screen and (max-width: 767px) and (min-width: 500px) {
+    .discussion {
+        width: 70vw;
+        margin-top: 120px;
+        margin-left: 30vw;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .discussion {
+        width: 96vw;
+        margin-top: 120px;
     }
 }
 
 
 .addDisc {
     position: absolute;
-    top: 10;
-    right: 50;
     z-index: 10;
+    margin-top: -40px;
+    margin-left: 200px;
 }
 
 .Disc {

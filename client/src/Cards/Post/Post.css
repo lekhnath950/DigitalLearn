@@ -11,10 +11,21 @@
     gap: 2px;
 }
 
+@media only screen and (min-width: 767px) {
+    .thumbimg{
+        height: 150px;
+        border-radius: 10px;
+    }
 
-.imggg{
-    padding: 5px 1px;
+    .imggg{
+        padding: 20px 5px;
+    }
+
 }
+
+
+
+
 
 
 .post-thumbnail {
