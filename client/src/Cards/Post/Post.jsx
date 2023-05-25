@@ -73,8 +73,8 @@ const Post = ({ post }) => {
                 <div className='abb'>
                     <div className='imggg'>
                     <Link to={`/posts/${post._id}`} >
-                        <img src={post.imgUrl} alt="" height={200} />
-                    </Link>
+                        <img src={post.imgUrl} alt="thumbnail" className='thumbimg' />
+                        </Link>
                     </div>
 
                     <div className='text-post'>

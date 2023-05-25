@@ -85,7 +85,7 @@ a {
     transition: background-color 0.3s ease;
 }
 
-.menus h4{
+.menus h4 {
     font-size: 15px;
     font-weight: 550;
 }
@@ -101,10 +101,31 @@ a {
 }
 
 
+
+
+.inputField {
+    border: 1px solid grey;
+    /* text-align: center; */
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    text-align: center;
+    height: 30px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    /* justify-content: center; */
+}
+
+.inputField input {
+    border: none;
+    outline: none;
+}
+
 .dialog-title-login {
     font-size: 24px;
     font-weight: bold;
     padding: 10px !important;
+    text-align: center;
 }
 
 .dialog-content form {
@@ -113,22 +134,27 @@ a {
     margin-top: 10px;
 }
 
-.dialog-content input {
+/* .dialog-content input {
     margin-bottom: 10px;
     padding: 10px;
     border: none;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-}
+} */
 
 .dialog-actions button {
     background-color: #2196f3;
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 14px;
+    padding: 2px 1px;
+    font-size: 11px;
     cursor: pointer;
+
+}
+
+.login-bt {
+    margin-top: 10px !important;
 }
 
 .dialog-actions button:hover {
@@ -136,7 +162,29 @@ a {
 }
 
 
-.menu-main header{
+.login-error {
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    margin-top: 4px;
+    gap: 3px;
+    color: red;
+    transition: all 1s ease-in-out;
+}
+
+.login-error svg {
+    color: red;
+    font-size: 20px;
+}
+
+.new-user {
+    text-align: center;
+    text-decoration: underline;
+    color: #0c7cd5;
+    font-size: 12px;
+}
+
+.menu-main header {
     width: max-content !important;
     right: auto !important;
     background-color: transparent;
@@ -144,48 +192,48 @@ a {
 }
 
 @media screen and (max-width: 500px) {
-  .mobile {
-    display: block;
-    margin-top: 14%;
-  }
+    .mobile {
+        display: block;
+        margin-top: 14%;
+    }
 
 
 
-  .notmob{
-    display: none;
-  }
+    .notmob {
+        display: none;
+    }
 
 
-  .menu-main {
-    width: auto;
-    height: auto;
-}
+    .menu-main {
+        width: auto;
+        height: auto;
+    }
 }
 
 @media screen and (min-width: 501px) {
-  .mobile {
-    display: none !important;
-  }
+    .mobile {
+        display: none !important;
+    }
 }
 
-.a23 svg{
+.a23 svg {
     fill: black;
     position: fixed;
     z-index: 10;
 }
 
-.a1{
+.a1 {
     background-color: white;
 }
 
-.a2{
+.a2 {
     color: darkblue;
     /* border-bottom: 1px solid grey; */
 }
 
 
 
-.navbar-home{
+.navbar-home {
     width: 140px;
 }
 
@@ -193,27 +241,27 @@ a {
 
 @media only screen and (max-width:500px) {
 
-    .Navbar-search{
+    .Navbar-search {
         margin-left: 10px;
         padding: 1px 5px;
     }
 
-    .searchbar{
+    .searchbar {
         width: 40px;
         height: 10px;
     }
 
-    .searchbar:focus{
+    .searchbar:focus {
         width: 50px;
     }
 
-    .auth button{
+    .auth button {
         font-size: 12px;
         line-height: 1;
         padding: 4px 1px;
     }
 
-    .aa h3{
+    .aa h3 {
         font-size: 12px;
         font-weight: 400;
         margin-left: 20px;

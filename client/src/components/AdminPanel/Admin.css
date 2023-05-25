@@ -1,4 +1,4 @@
-.adminTable{
+/* .adminTable{
     border: 1px solid grey;
 }
 
@@ -8,4 +8,39 @@
 
 .adminTable tbody tr td{
     border: 1px solid grey;
-}
+} */
+
+
+.adminTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .adminTable th,
+  .adminTable td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .adminTable th {
+    background-color: #f2f2f2;
+  }
+  
+  .adminTable select,
+  .adminTable input[type="text"],
+  .adminTable button {
+    padding: 6px;
+  }
+  
+  .adminTable button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .adminTable button:hover {
+    background-color: #45a049;
+  }
+  

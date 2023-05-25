@@ -28,7 +28,7 @@ const Discussion = () => {
     const fetchDiscussions = async () => {
       try {
         const response = await axios.post(`/review/discussion?page=${currentPage}`);
-        dispatch(discSuccess([...discus, ...response.data.discussions]));
+        dispatch(discSuccess([...response.data.discussions]));
         setTotalPages(response.data.totalPages);
 
 

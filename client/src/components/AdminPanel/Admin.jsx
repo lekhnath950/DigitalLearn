@@ -47,6 +47,13 @@ const Admin = () => {
 		setEditRole('');
 	};
 
+	const handleCancel = () => {
+		setEditUserId('');
+		setEditName('');
+		setEditEmail('');
+		setEditRole('');
+	};
+
 	return (
 		<div>
 
@@ -107,9 +114,16 @@ const Admin = () => {
 								</td>
 								<td>
 									{editUserId === user._id ? (
-										<button onClick={handleSave}>Save</button>
+										<div>
+											<button onClick={handleSave}>Save</button>
+											<button onClick={handleCancel}>Cancel</button>
+
+										</div>
 									) : (
-										<button onClick={() => handleEdit(user._id)}>Edit</button>
+										<div>
+											<button onClick={() => handleEdit(user._id)}>Edit</button>
+
+										</div>
 									)}
 								</td>
 							</tr>
