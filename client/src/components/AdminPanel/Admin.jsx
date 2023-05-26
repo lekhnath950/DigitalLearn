@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Admin.css'
 import Navbar from '../Navbar/Navbar';
 import LeftNav from '../Navbar/LeftNav';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
 	const [allUser, setAllUser] = useState([]);
@@ -14,6 +15,7 @@ const Admin = () => {
 	useEffect(() => {
 		const fetchAllUsers = async () => {
 			const res = await axios.get('/users/allusers');
+			console.log(res.data)
 			setAllUser(res.data);
 		};
 		fetchAllUsers();
@@ -70,6 +72,8 @@ const Admin = () => {
 							<th>Role</th>
 							<th>Name</th>
 							<th>Email</th>
+							<th>Posts</th>
+							<th>Disc</th>
 							<th>Edit</th>
 						</tr>
 					</thead>
@@ -98,7 +102,9 @@ const Admin = () => {
 											onChange={(e) => setEditName(e.target.value)}
 										/>
 									) : (
-										user.name
+										<Link to={`/user/${user._id}`} >
+											{user.name}
+										</Link>
 									)}
 								</td>
 								<td>
@@ -112,6 +118,13 @@ const Admin = () => {
 										user.email
 									)}
 								</td>
+								<td>
+									{user.posts.length}
+								</td>
+								<td>
+									{user.discs.length}
+								</td>
+
 								<td>
 									{editUserId === user._id ? (
 										<div>

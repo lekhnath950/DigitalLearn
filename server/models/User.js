@@ -30,6 +30,15 @@ const UserSchema = new mongoose.Schema({
     subscribedUsers: {
         type: [String]
     },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Post'
+    }],
+
+    discs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Disc'
+    }],
 
     role: {
         type: String,

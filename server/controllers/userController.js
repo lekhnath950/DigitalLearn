@@ -54,7 +54,14 @@ export const deleteUser = async (req,res, next) => {
 
 export const getUser = async (req, res,next) => {
     try {
-        const user = await User.findById(req.params.id)
+        // const user = await User.findById(req.params.id).populate("discs discs.userId discs.rep")
+        const user = await User.findById(req.params.id).populate({
+            path: "discs",
+            populate: [
+              { path: "userId" },
+              { path: "reply.userId" }
+            ],
+          });
         res.status(200).json(user);
 
     } catch (err) {
@@ -150,10 +157,20 @@ export const userLikes = async (req, res, next) => {
 
 export const allUser = async(req,res,next) => {
     try {
-        const users = await User.find()
+        const users = await User.find().populate("discs")
         // console.log(users)
+
+        // const usersWithPostsCount = await Promise.all(
+        //     users.map(async (user) => {
+        //       const postsCount = await Post.countDocuments({ userId: user._id });
+        //       return { ...user.toObject(), postsCount };
+        //     })
+        //   );
+
         return res.status(200).json(users)
     } catch (error) {
         next(error)
     }
 }
+
+

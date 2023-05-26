@@ -46,6 +46,11 @@ export const createDisc = async (req,res,next) => {
     const newDisc = new Discussion({userId: req.user.id, ...req.body})
     try {
         const saveDisc = await newDisc.save()
+
+        const user = await User.findById(req.user.id);
+        user.discs.push(saveDisc._id);
+        await user.save();
+
         res.status(200).json(saveDisc)    
     } catch (error) {
         next(error)
@@ -132,8 +137,13 @@ export const deleteDisc = async (req,res,next) => {
     try {
         const disc = await Discussion.findById(req.params.id)
         if(!disc) return next(createError(404,"Discussion not found!"))
-        if(req.user.id === disc.userId) {
+        const user = await User.findById(req.user.id);
+        if(req.user.id === disc.userId || user.role === 'owner') {
             await Discussion.findByIdAndDelete(req.params.id)
+
+            // const user = await User.findById(req.user.id);
+            user.discs.pull(req.params.id);
+            await user.save();
             res.status(200).json("Deleted")
         } else {
             return next(createError(404,"Unauthorized"))

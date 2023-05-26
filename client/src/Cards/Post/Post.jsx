@@ -7,6 +7,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material'
 import { useSelector } from 'react-redux'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const Post = ({ post }) => {
@@ -78,23 +80,31 @@ const Post = ({ post }) => {
                     </div>
 
                     <div className='text-post'>
-                        <h3>{post.title} <span> [{moment(post.createdAt).fromNow()}]  </span></h3>
+                        <h3>{post.title} 
+                        <span> {moment(post.createdAt).fromNow()}  </span>
+                        </h3>
 
 
                         <p>{post.desc}</p>
                     </div>
 
                     <div className='iii'>
-                    <FavoriteBorderIcon />
-                    <p>{post.likes.length}</p>
-                    <button onClick={handleDropdownToggle}><MoreHorizIcon/></button>
+                    {/* <FavoriteBorderIcon />
+                    <p>{post.likes.length}</p>*/}
+
                     {
-                        user && user._id === post.userId &&
+                        user && user._id === post.userId && (
+                            <span onClick={handleDropdownToggle}><MoreHorizIcon/></span> 
+                            )
+                    }
+
+                    {
+                        user && (user._id === post.userId || user.role ==="owner") &&
                         
                             isOpen && (
                                 <>
-                                <button onClick={handleEditPost}>edit post</button>
-                                <button onClick={()=> deleteHandler(post._id)}>delete post</button>
+                                <span onClick={handleEditPost}><EditIcon/></span>
+                                <span onClick={()=> deleteHandler(post._id)}><DeleteIcon/></span>
                                 </>
                                 )
                             
@@ -103,13 +113,13 @@ const Post = ({ post }) => {
 
                     </div>
 
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>
-
-                        </DialogTitle>
-                        <DialogContent>
+                    <Dialog className='editD' open={open} onClose={handleClose}>
+                        <DialogTitle className='DT'> Edit Your Post <span onClick={handleClose} style={{float:'right'}}>close</span></DialogTitle>
+                        <DialogContent className='DC'>
                             <form onSubmit={(e)=> editHandler(e,post._id)}>
+                                <label>Title:</label>
                             <textarea type='text' value={editTitle} placeholder='title' onChange={(e)=> setEditTitle(e.target.value)} />
+                                <label>Description:</label>
                             <textarea type="text" value={editDesc} placeholder='description' onChange={(e)=> setEditDesc(e.target.value)} />
                             <button type="submit">save</button>
                             </form>

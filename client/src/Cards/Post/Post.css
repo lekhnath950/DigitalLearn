@@ -1,145 +1,86 @@
 .post {
-    border: 1px solid grey;
-    /* max-width: 30vw; */
-    border-radius: 10px;
-}
-
-.abb{
-    display: flex;
-    height: 200px;
-    overflow-y: hidden;
-    gap: 2px;
-}
-
-@media only screen and (min-width: 767px) {
-    .thumbimg{
-        height: 150px;
-        border-radius: 10px;
-    }
-
-    .imggg{
-        padding: 20px 5px;
-    }
-
-}
-
-
-
-
-
-
-.post-thumbnail {
-    width: 30vw;
-    height: 200px;
-    margin-right: 20px;
-}
-
-.post-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-
-}
-
-.profilepic {
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-}
-
-.play {
-    margin-top: -50px;
-}
-
-.play:hover {
-    cursor: pointer;
-}
-
-.post {
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 16px;
-}
-
-.text-post h3{
-    font-size: 14px;
-    font-weight:600;
-    margin: 0;
-    padding: 16px;
+  }
+  
+  .abb {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ddd;
-    border-radius: 4px 4px 0 0;
+    height: 200px;
+    overflow-y: hidden;
+    gap: 2px;
+  }
+  
+  .thumbimg {
+    height: 150px;
+    border-radius: 10px;
+  }
+  
+  .imggg {
+    padding: 20px 5px;
+  }
+  
+  .text-post {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .text-post h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    padding-bottom: 10px;
     cursor: pointer;
-}
+  }
 
-.text-post:hover {
-    background-color: #ccc;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.post-content {
-    padding: 16px;
+  .text-post h3 span{
+    font-size: 10px;
+    color: grey;
+  }
+  
+  .text-post p {
+    font-size: 14px;
+    font-weight: 400;
     text-align: justify;
-}
-
-@media only screen and (max-width: 500px) {
-    .post{
-        width: 95%;
-        padding: 0 5px;
-    }
-
-    .abb{
-        display: block !important;
-        height: max-content;
-    }
-
-    .imggg{
-        /* width: 100%; */
-        height: 200px;
-        display: flex;
-        justify-content: center;
-        /* align-items: center !important; */
-        /* align-content: center; */
-    }
-
- 
-
-
-
-    .text-post h3{
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    .text-post p{
-        font-size: 12px;
-        font-weight: 400;
-        text-align: justify;
-    }
-
-    .iii{
-        display: none;
-    }
-
-
-}
-
-
-.MuiDialog-paper {
-    margin: 0;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.MuiDialogTitle-root {
-    padding: 20px;
-    margin: 0;
-}
-
-.MuiDialogTitle-root .dialog-title {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .iii {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .iii span {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .iii span:hover {
+    background-color: #ddd;
+  }
+  
+  .iii span svg {
+    font-size: 18px;
+  }
+  
+  .dialog-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -148,81 +89,134 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
-}
-
-.MuiDialogContent-root {
+  }
+  
+  .MuiDialogTitle-root {
     padding: 20px;
-}
-
-.MuiDialogActions-root {
-    padding: 10px 20px;
-}
-
-.dialog-title {
+    margin: 0;
+  }
+  
+  .MuiDialogContent-root {
+    padding: 20px;
+  }
+  
+  .dialog-title {
     font-size: 24px;
     font-weight: bold;
-}
-
-.dialog-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-.dialog-video {
+  }
+  
+  .dialog-video {
     display: block;
     margin: 20px auto;
-}
-
-.dialog-desc {
+  }
+  
+  .dialog-desc {
     margin-top: 20px;
     text-align: justify;
-}
-
-.dialog-updated {
+    line-height: 1.5;
+  }
+  
+  .dialog-updated {
     margin-top: 10px;
     font-size: 14px;
     color: gray;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .post {
+      width: 95%;
+      padding: 0 5px;
+    }
+  
+    .abb {
+      display: block !important;
+      height: max-content;
+    }
+  
+    .imggg {
+      height: 200px;
+      display: flex;
+      justify-content: center;
+    }
+  
+    .text-post h3 {
+      font-size: 14px;
+    }
+  
+    .text-post p {
+      font-size: 12px;
+    }
+  
+    .iii {
+      display: none;
+    }
+  }
+
+.editD .DT {
+  background-color: #f2f2f2;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-@media (max-width: 600px) {
-    .MuiDialogContent-root .dialog-video {
-        width: 100%;
-    }
-
-    .MuiDialogContent-root .dialog-desc {
-        font-size: 14px;
-    }
+.editD .DC {
+  padding: 20px;
+  width: 400px;
 }
 
-@media (max-width: 600px) {
-    .accordion-container {
-        flex-direction: column;
-    }
-
-    .accordion-heading {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    .accordion-content {
-        font-size: 14px;
-    }
+.editD form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-
-
-
-
-
-
-
-
-.iii{
-    text-align: center;
-    margin: auto 30px;
+.editD label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
+
+.DT span:hover{
+  cursor: pointer;
+}
+
+.editD textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.editD button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.editD button:hover {
+  background-color: #45a049;
+}
+
+.editD button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.editD button:disabled:hover {
+  background-color: #cccccc;
+}
+
+  
 
 
 
