@@ -6,6 +6,9 @@ import Post from '../../Cards/Post/Post';
 import Navbar from '../Navbar/Navbar';
 import LeftNav from '../Navbar/LeftNav';
 import './User.css'; // Import the CSS file
+import { Tooltip } from '@mui/material';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import VerifiedIcon from '@mui/icons-material/Verified';
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../redux/userSlice';
 
@@ -62,6 +65,24 @@ const User = () => {
         <div className='user-info'>
           <p>Name: {info.name}</p>
           <p>Email: {info.email}</p>
+          <p>Role: {info.role}
+          {
+                 info.role === "owner" && 
+                    <span className='user-icons'>
+                      <Tooltip title="admin">
+                        <VerifiedUserIcon />
+                      </Tooltip>
+                    </span>
+              } 
+              {
+                 info.role === "admin" && 
+                <span  className='user-icons'>
+                <Tooltip title="instructer">
+                  <VerifiedIcon />
+                </Tooltip>
+              </span>
+              }
+              </p>
           {/* <button onClick={()=> handleDelete(info._id)}>Delete account</button> */}
         </div>
       )}

@@ -35,3 +35,10 @@
 .content {
     margin-top: 20px;
 }
+
+
+@media only screen and (max-width:500px){
+    .user-style{
+        margin-left: 0px;
+    }
+}

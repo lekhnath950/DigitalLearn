@@ -62,9 +62,9 @@ function Navbar() {
   }
 
   const logoutt = async () => {
+    await navi("/")
     await axios.post("/auth/logout")
     dispatch(logout())
-    navi("/")
   }
 
   const [query, setQuery] = useState("");

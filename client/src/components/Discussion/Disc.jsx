@@ -7,7 +7,9 @@ import moment from 'moment'
 import SendIcon from '@mui/icons-material/Send';
 import { discFailure, discSuccess } from '../../redux/discSlice';
 import { Link } from 'react-router-dom';
-
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import { Tooltip } from '@mui/material';
 
 const Disc = ({ disc, reply }) => {
 
@@ -95,11 +97,30 @@ const Disc = ({ disc, reply }) => {
           <div className="Disc" >
             <h4 className="D-topic">{disc.topic}</h4>
             <div className='D-info'>
-              <p> <span>Posted by:</span>
+              
+                <div className='postedby'>
+                <span>Posted by:</span>
               <Link to={`/user/${disc.userId?._id}`} >
               {disc.userId?.name}
+              {
+                disc && disc.userId && disc.userId.role === "owner" && 
+                    <span className='user-icons'>
+                      <Tooltip title="admin">
+                        <VerifiedUserIcon />
+                      </Tooltip>
+                    </span>
+              } 
+              {
+                disc && disc.userId && disc.userId.role === "admin" && 
+                <span  className='user-icons'>
+                <Tooltip title="instructer">
+                  <VerifiedIcon />
+                </Tooltip>
+              </span>
+              } 
               </Link>
-              </p>
+              </div>
+              
 
               <p>{moment(disc.createdAt).fromNow()}</p>
               {
