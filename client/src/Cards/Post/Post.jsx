@@ -93,7 +93,7 @@ const Post = ({ post }) => {
                     <p>{post.likes.length}</p>*/}
 
                     {
-                        user && user._id === post.userId && (
+                        user && (user._id === post.userId || user.role === "owner") && (
                             <span onClick={handleDropdownToggle}><MoreHorizIcon/></span> 
                             )
                     }

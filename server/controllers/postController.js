@@ -32,6 +32,10 @@ export const updatePost = async (req,res,next) => {
             },
             {new: true}
             );
+
+            // const user = await User.findById(req.user.id);
+            // user.posts.push(updatedPost._id)
+            // await user.save()
             res.status(200).json(updatedPost);
         }
     } catch (err) {

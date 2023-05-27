@@ -56,6 +56,18 @@ const Admin = () => {
 		setEditRole('');
 	};
 
+	const handleDelete = async (delId) => {
+		const confirmed = window.confirm("Are you sure you want to delete?");
+		if (confirmed) {
+		  try {
+			await axios.delete(`/users/${delId}`);
+			alert("Deleted");
+		  } catch (error) {
+			console.error("Error occurred during deletion:", error);
+		  }
+		}
+	  };
+	  
 	return (
 		<div>
 
@@ -75,6 +87,7 @@ const Admin = () => {
 							<th>Posts</th>
 							<th>Disc</th>
 							<th>Edit</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -138,6 +151,9 @@ const Admin = () => {
 
 										</div>
 									)}
+								</td>
+								<td>
+									<button onClick={()=> handleDelete(user._id)}>delete</button>
 								</td>
 							</tr>
 						))}

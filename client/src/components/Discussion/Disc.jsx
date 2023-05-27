@@ -44,12 +44,14 @@ const Disc = ({ disc, reply }) => {
 
   const deleteReply = async (id, replyid) => {
     try {
-      await window.confirm("want to delete?")
-      const res = await axios.delete(`/review/${id}/replies/${replyid}`)
-      setMsg(res.data)
-      setMsgOpen(true)
-      const res1 = await axios.post("/review/getdisc")
-      dispatch(discSuccess(res1.data));
+     const confirmed = window.confirm("want to delete?")
+      if (confirmed) {
+        const res = await axios.delete(`/review/${id}/replies/${replyid}`)
+        setMsg(res.data)
+        setMsgOpen(true)
+        const res1 = await axios.post("/review/getdisc")
+        dispatch(discSuccess(res1.data));
+      }
     } catch (error) {
       console.log(error)
     }
@@ -95,7 +97,7 @@ const Disc = ({ disc, reply }) => {
             <div className='D-info'>
               <p> <span>Posted by:</span>
               <Link to={`/user/${disc.userId?._id}`} >
-              {disc.userId.name}
+              {disc.userId?.name}
               </Link>
               </p>
 
@@ -110,13 +112,13 @@ const Disc = ({ disc, reply }) => {
 
 
             <form onSubmit={(e) => handleReply(e, disc._id)} className='D-rep' >
-              <textarea maxLength={1000} value={replyInputs[disc._id] || ""} type="text" placeholder={user ? "Add a Reply" : "Login to add a reply"} onChange={(e) => handleReplyChange(e, disc._id)} />
+              <textarea required maxLength={1000} value={replyInputs[disc._id] || ""} type="text" placeholder={user ? "Add a Reply" : "Login to add a reply"} onChange={(e) => handleReplyChange(e, disc._id)} />
               <button disabled={!user}><SendIcon fontSize="small" /></button>
             </form>
 
             {reply &&
               reply.map((replydisc) => (
-                <>
+                <div className='DDD'>
                   <div className='D-replies'>
                     <div className="D-reply" key={replydisc._id}>
                       <p className='D-replyName'>Replied by 
@@ -139,7 +141,7 @@ const Disc = ({ disc, reply }) => {
 
 
                   </div>
-                </>
+                </div>
               ))}
             <p className='no-reply'>{disc.reply?.length === 0 ? "No Reply" : ""} </p>
 

@@ -93,23 +93,14 @@ const Discussion = () => {
 
       <div className="discussion">
 
+
+<div className='dis'>
         <div>
           <form onSubmit={searchHandle} className='d-search'>
             <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder='search' />
             <button><Search /></button>
           </form>
         </div>
-
-
-
-        {
-          result && result.map(disc => (
-            <>
-              <Disc key={disc._id} disc={disc} reply={disc.reply} />
-            </>
-          ))
-        }
-
 
         <div className="addDisc">
           <Button onClick={handleOpen}><AddCircleIcon />Create Discussion</Button>
@@ -124,13 +115,26 @@ const Discussion = () => {
 
             <DialogContent>
               <form onSubmit={handleSubmit} className='ask'>
-                <input value={topic} type="text" placeholder="Topic" onChange={(e) => setTopic(e.target.value)} />
-                <button>Submit</button>
+                <textarea value={topic} type="text" placeholder="Topic" onChange={(e) => setTopic(e.target.value)} />
+                <button variant='outlined'>Post</button>
               </form>
             </DialogContent>
 
           </Dialog>
         </div>
+
+        </div>
+
+
+        {
+          result && result.map(disc => (
+            <>
+              <Disc key={disc._id} disc={disc} reply={disc.reply} />
+            </>
+          ))
+        }
+
+
 
         {
           discus && discus.map(disc => (
@@ -143,7 +147,7 @@ const Discussion = () => {
       </div>
 
       {currentPage < totalPages && (
-        <button style={{ 'marginLeft': '50vw' }} onClick={loadMore}>Load more</button>
+        <button className='load-more' onClick={loadMore}>Load more</button>
       )}
 
       <Snackbar open={msgOpen} message={msg && msg} autoHideDuration={1000} />
