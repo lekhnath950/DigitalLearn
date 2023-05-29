@@ -91,6 +91,8 @@ const Discussion = () => {
         <LeftNav />
       </div>
 
+      <div className='dissss'>
+
       <div className="discussion">
 
 
@@ -146,9 +148,15 @@ const Discussion = () => {
 
       </div>
 
+      <div className='load-more'>
       {currentPage < totalPages && (
-        <button className='load-more' onClick={loadMore}>Load more</button>
+        <button onClick={loadMore}>Load more</button>
       )}
+
+      </div>
+
+      </div>
+
 
       <Snackbar open={msgOpen} message={msg && msg} autoHideDuration={1000} />
 

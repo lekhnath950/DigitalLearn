@@ -84,7 +84,7 @@ export const discSearch = async (req, res, next) => {
 
 
 export const getDiscLimit = async (req, res, next) => {
-    const { page = 1, limit = 3 } = req.query; // Set default page to 1 and limit to 5 discussions per page
+    const { page = 1, limit = 12 } = req.query; // Set default page to 1 and limit to 5 discussions per page
   
     try {
       const count = await Discussion.countDocuments(); // Get total count of discussions in the database
