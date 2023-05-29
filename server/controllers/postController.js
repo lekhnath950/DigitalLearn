@@ -11,6 +11,11 @@ export const addPost = async (req, res, next) => {
     const newVideo = new Post({ userId: req.user.id, ...req.body });
     try {
       const savedVideo = await newVideo.save();
+
+      const user = await User.findById(req.user.id);
+      user.posts.push(savedVideo._id)
+      await user.save()
+      
       res.status(200).json(savedVideo);
     } catch (err) {
       next(err);
@@ -27,6 +32,10 @@ export const updatePost = async (req,res,next) => {
             },
             {new: true}
             );
+
+            // const user = await User.findById(req.user.id);
+            // user.posts.push(updatedPost._id)
+            // await user.save()
             res.status(200).json(updatedPost);
         }
     } catch (err) {
@@ -38,8 +47,12 @@ export const deletePost = async (req,res,next) => {
     try {
         const video = await Post.findById(req.params.id)
         if(!video) return next(createError(404,"Post not found"))
-        if(req.user.id === video.userId) {
+        const user = await User.findById(req.user.id);
+        if(req.user.id === video.userId || user.role === "owner" ) {
              await Post.findByIdAndDelete(req.params.id);
+            // deleting postid from user
+             user.posts.pull(req.params.id);
+             await user.save();
             res.status(200).json("The post has been deleted");
         }
         

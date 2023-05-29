@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Admin.css'
 import Navbar from '../Navbar/Navbar';
 import LeftNav from '../Navbar/LeftNav';
+import { Link } from 'react-router-dom';
 
 const Admin = () => {
 	const [allUser, setAllUser] = useState([]);
@@ -14,6 +15,7 @@ const Admin = () => {
 	useEffect(() => {
 		const fetchAllUsers = async () => {
 			const res = await axios.get('/users/allusers');
+			console.log(res.data)
 			setAllUser(res.data);
 		};
 		fetchAllUsers();
@@ -47,6 +49,25 @@ const Admin = () => {
 		setEditRole('');
 	};
 
+	const handleCancel = () => {
+		setEditUserId('');
+		setEditName('');
+		setEditEmail('');
+		setEditRole('');
+	};
+
+	const handleDelete = async (delId) => {
+		const confirmed = window.confirm("Are you sure you want to delete?");
+		if (confirmed) {
+		  try {
+			await axios.delete(`/users/${delId}`);
+			alert("Deleted");
+		  } catch (error) {
+			console.error("Error occurred during deletion:", error);
+		  }
+		}
+	  };
+	  
 	return (
 		<div>
 
@@ -63,7 +84,10 @@ const Admin = () => {
 							<th>Role</th>
 							<th>Name</th>
 							<th>Email</th>
+							<th>Posts</th>
+							<th>Disc</th>
 							<th>Edit</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -91,7 +115,9 @@ const Admin = () => {
 											onChange={(e) => setEditName(e.target.value)}
 										/>
 									) : (
-										user.name
+										<Link to={`/user/${user._id}`} >
+											{user.name}
+										</Link>
 									)}
 								</td>
 								<td>
@@ -106,11 +132,28 @@ const Admin = () => {
 									)}
 								</td>
 								<td>
+									{user.posts.length}
+								</td>
+								<td>
+									{user.discs.length}
+								</td>
+
+								<td>
 									{editUserId === user._id ? (
-										<button onClick={handleSave}>Save</button>
+										<div>
+											<button onClick={handleSave}>Save</button>
+											<button onClick={handleCancel}>Cancel</button>
+
+										</div>
 									) : (
-										<button onClick={() => handleEdit(user._id)}>Edit</button>
+										<div>
+											<button onClick={() => handleEdit(user._id)}>Edit</button>
+
+										</div>
 									)}
+								</td>
+								<td>
+									<button onClick={()=> handleDelete(user._id)}>delete</button>
 								</td>
 							</tr>
 						))}

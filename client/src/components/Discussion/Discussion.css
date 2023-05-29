@@ -3,25 +3,55 @@
     height: 80%;
     max-height: 800px;
     margin: auto auto;
-    /* display: flex; */
-    /* justify-content: flex-end; */
     margin-top: 120px;
 
 }
 
-@media screen and (max-width: 767px) {
+
+
+@media screen and (min-width: 767px) {
     .discussion {
-        width: 99%;
-        margin: 120px 0px;
+        width: 75vw;
+        margin-top: 120px;
+        margin-left: 25vw;
     }
 }
 
 
+@media screen and (max-width: 767px) and (min-width: 500px) {
+    .discussion {
+        width: 70vw;
+        margin-top: 120px;
+        margin-left: 30vw;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .discussion {
+        width: 96vw;
+        margin-top: 120px;
+    }
+
+    .addDisc{
+        margin-left: 0 !important;
+    }
+
+    .dis{
+        justify-content:center;
+    }
+}
+
+
+.dis{
+    display: flex;
+}
+
+
 .addDisc {
-    position: absolute;
-    top: 10;
-    right: 50;
-    z-index: 10;
+    /* position: absolute; */
+    /* z-index: 10; */
+    /* margin-top: -40px; */
+    margin-left: 200px;
 }
 
 .Disc {
@@ -35,25 +65,48 @@
 .D-topic {
     font-weight: 500;
     box-shadow: 1px 2px 3px grey;
-    width: fit-content;
+    overflow-x: auto;
+    /* width: 200px; */
     border-radius: 5px;
     padding: 4px 6px;
+    white-space: pre-wrap;
 }
+
+
+
+
 
 
 .D-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 1px;
     padding: 1px 1px;
-    margin-top: -19px;
+    margin-top: -20px;
+    /* border: 1px solid black; */
     font-size: 12px;
+    /* text-align: center; */
+}
+
+.user-icons svg{
+    font-size: 14px !important;
+    color: #0056b3;
+    
 }
 
 .D-info p {
     color: grey;
     line-height: 0;
 
+}
+
+.postedby{
+    /* border: 1px solid grey; */
+    /* padding: 10px; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
 }
 
 .D-reply {
@@ -64,15 +117,10 @@
     cursor: pointer;
     display: inline-block;
     padding: 1px 2px;
-    /* font-size: 16px; */
     font-weight: bold;
-    color: #ffffff;
     text-align: center;
     text-decoration: none;
-    background-color: red;
-    /* border: 2px solid #007bff; */
     border-radius: 8px;
-    /* transition: all 1ms ease-in-out; */
     cursor: pointer;
 }
 
@@ -99,8 +147,7 @@
 }
 
 .D-rep textarea:focus {
-    transition: 0.7s ease;
-    width: 300px;
+    transition: 0.4s ease;
     height: 100px;
 }
 
@@ -119,15 +166,29 @@
 .ask {
     width: max-content;
     border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
 }
 
-.ask input {
+.ask button{
+    width: 100%;
+    height: 100%;
+}
+
+.ask textarea {
     outline: none;
     border: none;
-    height: 35px;
-    width: 200px;
+    resize: none;
+    height: 100px;
+    width: 100%;
     outline-width: 1px;
 }
+
+.ask textarea:focus{
+    height: 200px;
+}
+
+
 
 .D-replies {
     margin: 5px;
@@ -148,6 +209,8 @@
 
 .D-replied {
     text-align: justify;
+    white-space: pre-wrap;
+    overflow-x: auto;
 }
 
 .D-footer {
@@ -206,4 +269,9 @@
 .no-reply {
     font-size: 12px;
     color: grey;
+}
+
+.load-more{
+    margin-left: 30vw ;
+    margin-top: 50px;
 }

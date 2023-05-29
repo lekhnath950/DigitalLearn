@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import Signup from './components/Auth/Signup';
 import Tag from './components/Category/Tag';
 import Discussion from './components/Discussion/Discussion';
+import User from './components/User/User';
 
 function App() {
   const {user} = useSelector(state=> state.user)
@@ -23,6 +24,7 @@ function App() {
             <Route path='/category' element={<Category />}  />
             <Route path='/signup' element={<Signup />}  />
             <Route path='/discussion' element={<Discussion />}  />
+            <Route path='/user/:id' element={<User />}  />
             
             <Route path='/tag/:tag' element={<Tag />}  />
             {

@@ -7,7 +7,7 @@
 
 .content-feed{
     display: grid;
-    gap: 5vw;
+    gap: 10px;
     margin-left: 130px;
     margin-top: 20px;
 }

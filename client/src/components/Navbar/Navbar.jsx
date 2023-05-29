@@ -10,6 +10,9 @@ import { loginFailure, loginRequest, loginSuccess, logout } from '../../redux/us
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Post from '../../Cards/Post/Post'
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import LockIcon from '@mui/icons-material/Lock';
+import ErrorIcon from '@mui/icons-material/Error';
 
 
 function Navbar() {
@@ -41,7 +44,7 @@ function Navbar() {
     } catch (error) {
       dispatch(loginFailure({ message: error.response.data.message }))
       setMessageVisible(true) // show message
-    setTimeout(() => setMessageVisible(false), 5000) // hide message after 5 seconds
+      setTimeout(() => setMessageVisible(false), 10000) // hide message after 5 seconds
 
     }
   }
@@ -49,16 +52,19 @@ function Navbar() {
 
   const Dialogbox = () => {
     setDialog(true)
+    setMessageVisible(false)
+
   }
 
   const handleClose = () => {
     setDialog(false)
+    setMessageVisible(false)
   }
 
-  const logoutt = async() => {
+  const logoutt = async () => {
+    await navi("/")
     await axios.post("/auth/logout")
     dispatch(logout())
-    navi("/")
   }
 
   const [query, setQuery] = useState("");
@@ -87,44 +93,44 @@ function Navbar() {
 
   return (
     <div className=''>
-    <div className='Navbar-main'>
+      <div className='Navbar-main'>
 
-      <div className='aa'>
-        <Link to="/" >
-        <h3>DigitalLearn</h3>
-        </Link>
-      </div>
+        <div className='aa'>
+          <Link to="/" >
+            <h3>DigitalLearn</h3>
+          </Link>
+        </div>
 
-      <div className='Navbar-search'>
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={query} onChange={handleInputChange} placeholder="Search" className="searchbar" />
-          <button type='submit' className='searchInputButton'><SearchIcon /></button>
-        </form>
+        <div className='Navbar-search'>
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={query} onChange={handleInputChange} placeholder="Search" className="searchbar" />
+            <button type='submit' className='searchInputButton'><SearchIcon /></button>
+          </form>
 
-      </div>
+        </div>
 
 
 
-      <div className='auth'>
-        {
-          user ? (
-            <div>
-              <Button variant='outlined' onClick={logoutt} >Logout</Button>
-            </div>
-
-          ) : (
-            <div className='auth-right'>
-              <Button variant='outlined' onClick={Dialogbox} >Login</Button>
+        <div className='auth'>
+          {
+            user ? (
               <div>
-                <Link to="/signup">
-                <Button variant='outlined' >Sign Up</Button>
-                </Link>
+                <Button variant='outlined' onClick={logoutt} >Logout</Button>
               </div>
-            </div>
 
-          )
-        }
-      </div>
+            ) : (
+              <div className='auth-right'>
+                <Button variant='outlined' onClick={Dialogbox} >Login</Button>
+                <div>
+                  <Link to="/signup">
+                    <Button variant='outlined' >Sign Up</Button>
+                  </Link>
+                </div>
+              </div>
+
+            )
+          }
+        </div>
       </div>
 
       <Dialog open={openSearch} onClose={handleCloseSearch}>
@@ -142,10 +148,10 @@ function Navbar() {
                   <p>{result.desc}</p>
                   <p>
                     <Link to={`/posts/${result._id}`} >Play Video </Link>
-                <Post post={result} />
+                    <Post post={result} />
 
                   </p>
-                  <hr/>
+                  <hr />
                 </div>))) : "No content Available"}
 
 
@@ -155,22 +161,46 @@ function Navbar() {
       </Dialog>
 
 
-      <Dialog open={dialog} className='' onClose={handleClose}>
+      <Dialog open={dialog} onClose={handleClose} className="loginForm">
         <DialogActions className="dialog-actions">
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
         <DialogTitle className="dialog-title-login">Login</DialogTitle>
         <DialogContent className="dialog-content">
           <form >
-            <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} required />
-            <input type={showPassword ? "text" : "password"} placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
-            <div onClick={handleToggleShowPassword}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
+            <div className='inputField'>
+              <AlternateEmailIcon />
+              <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} required />
             </div>
 
-            { messageVisible && message ? message : ""}
-            <Button variant='outlined' onClick={handleLogin} >Login</Button>
+            <div className='inputField'>
+              <LockIcon />
+              <input type={showPassword ? "text" : "password"} placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
+              <div style={{ 'cursor': 'pointer' }} onClick={handleToggleShowPassword}>
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </div>
+            </div>
+
+            {messageVisible && message ? (
+              <div className='login-error'>
+                <ErrorIcon />
+                {message}
+              </div>
+            ) : ""
+
+            }
+
+
+
+            <Button className='login-bt' variant='outlined' onClick={handleLogin} >Login</Button>
           </form>
+
+
+
+
+          <Link to="/signup" className='new-user'>
+            <p >New User? Register here!</p>
+          </Link>
         </DialogContent>
       </Dialog>
 

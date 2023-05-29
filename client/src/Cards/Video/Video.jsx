@@ -1,6 +1,6 @@
 import axios from 'axios'
 import './video.css'
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { likeFailure, likeRequest, likeSuccess, postRequest, postSuccess } from '../../redux/postSlice';
 import React, { useEffect, useState } from 'react'
@@ -122,7 +122,11 @@ const Video = () => {
          
         <h3>{currentPost.title} </h3>
         <div className='v-data'>
-        <p>posted by:  {channel.name}</p>
+        <p>posted by: 
+          <Link to={`/user/${channel._id}`}>
+           {channel.name}
+           </Link> 
+           </p>
         <p>{moment(currentPost.createdAt).fromNow()}</p>
         </div>
 

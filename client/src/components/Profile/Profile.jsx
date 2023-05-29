@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
 import './Profile.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import Post from '../../Cards/Post/Post'
+import { logout } from '../../redux/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
     const {user} = useSelector(state=> state.user)
@@ -19,6 +21,23 @@ const Profile = () => {
         }
         fetchh()
     },[id])
+
+    const navi = useNavigate()
+    const dispatch = useDispatch()
+  
+    const handleDelete = async(delId) => {
+      const confirmed = window.confirm("want to delete your account?")
+      if(confirmed) {
+        try {
+          await axios.delete(`/users/${delId}`)
+          dispatch(logout())
+          alert("Deleted")
+          navi("/")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
   return (
     <div>
         <div>
@@ -31,6 +50,8 @@ const Profile = () => {
         <div className="profile content-feed">
             <p>Name: {user.name}</p>
             <p>Email: {user.email}</p>
+          <button onClick={()=> handleDelete(user._id)}>Delete account</button>
+
 
             {prof ? (
                 <p>Total Post:{prof.length}</p>
