@@ -25,7 +25,7 @@ const Tag = () => {
         <div>
             <LeftNav/>
         </div>
-        <div style={{"margin":200}}>
+        <div style={{"margin":200}} className='content-feed'>
             {
                 postT && postT.map((tag)=> 
                 (

@@ -1,0 +1,76 @@
+.uploadd {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dialog {
+    border-radius: 10px;
+    border: 3px solid grey;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dcontent {
+    width: 500px;
+    padding: 20px;
+}
+
+.dialog input[type="text"],
+.dialog input[type="file"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.dialog .upload-button {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dialog .progress-indicator {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.dialog .thumbnail-section {
+    margin-top: 20px;
+}
+
+.dialog .MuiDialogTitle-root {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.dialog .MuiDialogContent-root {
+    padding: 10;
+}
+
+.dialog .MuiDialogActions-root {
+    padding: 10px 0;
+    justify-content: flex-end;
+}
+
+.dialog .MuiButton-root {
+    margin-left: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: blue;
+}
+
+.dialog .MuiButton-root:hover {
+    color: #444;
+}

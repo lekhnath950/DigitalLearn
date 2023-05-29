@@ -67,7 +67,7 @@ const User = () => {
           <p>Email: {info.email}</p>
           <p>Role: {info.role}
           {
-                 info.role === "owner" && 
+                 info.role === "admin" && 
                     <span className='user-icons'>
                       <Tooltip title="admin">
                         <VerifiedUserIcon />
@@ -75,7 +75,7 @@ const User = () => {
                     </span>
               } 
               {
-                 info.role === "admin" && 
+                 info.role === "instructer" && 
                 <span  className='user-icons'>
                 <Tooltip title="instructer">
                   <VerifiedIcon />

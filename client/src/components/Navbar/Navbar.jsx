@@ -41,6 +41,7 @@ function Navbar() {
       const res = await axios.post("/auth/login", { email, password })
       setDialog(false)
       dispatch(loginSuccess({ user: res.data, message: res.data.message }))
+      navi("/")
     } catch (error) {
       dispatch(loginFailure({ message: error.response.data.message }))
       setMessageVisible(true) // show message
@@ -147,8 +148,8 @@ function Navbar() {
                   <h2>{result.title}</h2>
                   <p>{result.desc}</p>
                   <p>
-                    <Link to={`/posts/${result._id}`} >Play Video </Link>
-                    <Post post={result} />
+                    <Link to={`/posts/${result._id}`} >Open</Link>
+                    
 
                   </p>
                   <hr />

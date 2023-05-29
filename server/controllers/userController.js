@@ -54,7 +54,7 @@ export const deleteUser = async (req, res, next) => {
   
       if (
         authenticatedUserId === deletingUserId ||
-        authenticatedUser.role === "owner"
+        authenticatedUser.role === "admin"
       ) {
         // Remove user's replies from discussions
         await Discussion.updateMany(

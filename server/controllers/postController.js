@@ -48,7 +48,7 @@ export const deletePost = async (req,res,next) => {
         const video = await Post.findById(req.params.id)
         if(!video) return next(createError(404,"Post not found"))
         const user = await User.findById(req.user.id);
-        if(req.user.id === video.userId || user.role === "owner" ) {
+        if(req.user.id === video.userId || user.role === "admin" ) {
              await Post.findByIdAndDelete(req.params.id);
             // deleting postid from user
              user.posts.pull(req.params.id);
@@ -101,7 +101,7 @@ export const addView = async (req,res,next) => {
 export const random = async (req,res,next) => {
     try {
 
-        const post = await Post.aggregate([{$sample: {size: 6}}])
+        const post = await Post.aggregate([{$sample: {size: 12}}])
         res.status(200).json(post)
         
     } catch (err) {

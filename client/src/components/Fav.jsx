@@ -36,6 +36,10 @@ function Fav(props) {
         <Post key={like._id} post={like}/>
       ))}
     </div>
+    {
+      likes && likes.length === 0 && 
+      <p className='uploadd'>User has not added any posts to their favorites.</p> 
+    }
     </div>
     </>
   );

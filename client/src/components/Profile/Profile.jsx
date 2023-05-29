@@ -9,62 +9,65 @@ import { logout } from '../../redux/userSlice'
 import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
-    const {user} = useSelector(state=> state.user)
-    // const {currentPost} = useSelector(state=> state.postx)
-    const [prof, setProf] = useState([])
+  const { user } = useSelector(state => state.user)
+  // const {currentPost} = useSelector(state=> state.postx)
+  const [prof, setProf] = useState([])
 
-    let id = user._id;
-    useEffect(()=> {
-        const fetchh = async() => {
-            const res = await axios.get(`/posts/profile/${id}`)
-            setProf(res.data)
-        }
-        fetchh()
-    },[id])
+  let id = user._id;
+  useEffect(() => {
+    const fetchh = async () => {
+      const res = await axios.get(`/posts/profile/${id}`)
+      setProf(res.data)
+    }
+    fetchh()
+  }, [id])
 
-    const navi = useNavigate()
-    const dispatch = useDispatch()
-  
-    const handleDelete = async(delId) => {
-      const confirmed = window.confirm("want to delete your account?")
-      if(confirmed) {
-        try {
-          await axios.delete(`/users/${delId}`)
-          dispatch(logout())
-          alert("Deleted")
-          navi("/")
-        } catch (error) {
-          console.log(error)
-        }
+  const navi = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleDelete = async (delId) => {
+    const confirmed = window.confirm("want to delete your account?")
+    if (confirmed) {
+      try {
+        await axios.delete(`/users/${delId}`)
+        dispatch(logout())
+        alert("Deleted")
+        navi("/")
+      } catch (error) {
+        console.log(error)
       }
     }
+  }
   return (
     <div>
-        <div>
-            <Navbar/>
-        </div>
-        <div>
-            <LeftNav />
-        </div>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <LeftNav />
+      </div>
 
-        <div className="profile content-feed">
-            <p>Name: {user.name}</p>
-            <p>Email: {user.email}</p>
-          <button onClick={()=> handleDelete(user._id)}>Delete account</button>
+      <div className="profile content-feed">
+        <p>Name: {user.name}</p>
+        <p>Email: {user.email}</p>
+        {
+          user && user.role !== "admin" &&
+          <button onClick={() => handleDelete(user._id)}>Delete account</button>
+        }
 
 
-            {prof ? (
-                <p>Total Post:{prof.length}</p>
-            ): ""}
+        {prof ? (
+          <p>Total Post:{prof.length}</p>
+        ) : ""}
 
-            {prof && prof.map((postq)=> (
-                <>
-                <Post post={postq} />
-                </>
-            ))}
+        {prof && prof.map((postq) => (
+          <>
+            <Post post={postq} />
+          </>
+        ))}
 
-        </div>
-        
+      </div>
+
     </div>
   )
 }

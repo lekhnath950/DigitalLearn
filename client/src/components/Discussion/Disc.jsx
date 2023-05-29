@@ -103,7 +103,7 @@ const Disc = ({ disc, reply }) => {
               <Link to={`/user/${disc.userId?._id}`} >
               {disc.userId?.name}
               {
-                disc && disc.userId && disc.userId.role === "owner" && 
+                disc && disc.userId && disc.userId.role === "admin" && 
                     <span className='user-icons'>
                       <Tooltip title="admin">
                         <VerifiedUserIcon />
@@ -111,7 +111,7 @@ const Disc = ({ disc, reply }) => {
                     </span>
               } 
               {
-                disc && disc.userId && disc.userId.role === "admin" && 
+                disc && disc.userId && disc.userId.role === "instructer" && 
                 <span  className='user-icons'>
                 <Tooltip title="instructer">
                   <VerifiedIcon />
@@ -124,7 +124,7 @@ const Disc = ({ disc, reply }) => {
 
               <p>{moment(disc.createdAt).fromNow()}</p>
               {
-                user && disc.userId && (disc.userId._id === user._id || user.role =="owner") ? (
+                user && disc.userId && (disc.userId._id === user._id || user.role =="admin") ? (
                   <span onClick={() => deleteHandler(disc._id, disc.userId)}><DeleteIcon fontSize="small" /></span>
                 ) : null
               }
@@ -153,7 +153,7 @@ const Disc = ({ disc, reply }) => {
                     <div className='D-footer'>
                       <p>{moment(replydisc.time).fromNow()}</p>
                       {
-                        user && replydisc && (replydisc.userId._id === user._id) ? (
+                        user && replydisc && (replydisc.userId._id === user._id || user.role ==="admin") ? (
                           <span onClick={() => deleteReply(disc._id, replydisc._id)}><DeleteIcon fontSize="small" /></span>
                         ) : ""
                       }

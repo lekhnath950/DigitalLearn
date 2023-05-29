@@ -95,12 +95,12 @@ const Admin = () => {
 
 							<tr key={user._id}>
 								<td>
-									{editUserId === user._id && user.role !== "owner" ? (
+									{editUserId === user._id && user.role !== "admin" ? (
 
 										<select value={editRole} onChange={(e) => setEditRole(e.target.value)}>
 											<option value="user">User</option>
+											<option value="instructer">Instructer</option>
 											<option value="admin">Admin</option>
-											<option value="owner">Owner</option>
 										</select>
 
 									) : (

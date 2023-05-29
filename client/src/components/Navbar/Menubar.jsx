@@ -91,7 +91,7 @@ const Menubar = () => {
 
 
 				{
-					user && user.role === "owner" ? (
+					user && user.role === "admin" ? (
 						<>
 							<Link to="/admin">
 
@@ -116,7 +116,7 @@ const Menubar = () => {
 				}
 
 
-{user && (user.role === "admin" || user.role ==="owner") ? (
+{user && (user.role === "admin" || user.role ==="instructer") ? (
 						<Link to="/upload">
 
 							{
@@ -179,10 +179,10 @@ const Menubar = () => {
 							}
 						</Link>
 
-						<div className='menus a1'>
+						{/* <div className='menus a1'>
 							<SettingIcon />
 							<h4>Settings</h4>
-						</div>
+						</div> */}
 
 					</>
 				) : (

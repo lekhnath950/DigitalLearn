@@ -93,13 +93,13 @@ const Post = ({ post }) => {
                     <p>{post.likes.length}</p>*/}
 
                     {
-                        user && (user._id === post.userId || user.role === "owner") && (
+                        user && (user._id === post.userId || user.role === "admin") && (
                             <span onClick={handleDropdownToggle}><MoreHorizIcon/></span> 
                             )
                     }
 
                     {
-                        user && (user._id === post.userId || user.role ==="owner") &&
+                        user && (user._id === post.userId || user.role ==="admin") &&
                         
                             isOpen && (
                                 <>

@@ -43,12 +43,12 @@ const Home = () => {
 
         
         <div className='content-feed'>
-          {post.slice((page-1)*2,page*2).map((posts) => (
+          {post.slice((page-1)*6,page*6).map((posts) => (
             <Post key={posts.title} post={posts} />
           ))}
         </div>
       </div>
-      <Pagination count={Math.ceil(post.length / 2)} page={page} onChange={handleChange} className='hh' />
+      <Pagination count={Math.ceil(post.length / 6)} page={page} onChange={handleChange} className='hh' />
     </div>
   )
 }

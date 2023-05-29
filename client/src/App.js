@@ -22,19 +22,24 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />}  />
             <Route path='/category' element={<Category />}  />
-            <Route path='/signup' element={<Signup />}  />
             <Route path='/discussion' element={<Discussion />}  />
             <Route path='/user/:id' element={<User />}  />
+
+            {
+              !user ? (
+                <Route  path='/signup' element={<Signup />}  />
+              ): ""
+            }
             
             <Route path='/tag/:tag' element={<Tag />}  />
             {
-              user && user.role === "owner" ? (
+              user && user.role === "admin" ? (
                 <Route path='/admin' element={<Admin />}  />
                 
                 ) : ("")
               }
             {
-              user && (user.role === "admin" || user.role === "owner") ? (
+              user && (user.role === "admin" || user.role === "instructer") ? (
                 <Route path='/upload' element={<Upload />}  />
 
               ) : ("")

@@ -138,7 +138,7 @@ export const deleteDisc = async (req,res,next) => {
         const disc = await Discussion.findById(req.params.id)
         if(!disc) return next(createError(404,"Discussion not found!"))
         const user = await User.findById(req.user.id);
-        if(req.user.id === disc.userId || user.role === 'owner') {
+        if(req.user.id === disc.userId || user.role === 'admin') {
             await Discussion.findByIdAndDelete(req.params.id)
 
             // const user = await User.findById(req.user.id);
