@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
 import './auth.css'
+import { API } from '../../config'
 
 const Signup = () => {
 
@@ -15,7 +16,7 @@ const Signup = () => {
     const submitHandler = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post("auth/signup", {name,email,password})
+            const res = await axios.post(API+"auth/signup", {name,email,password})
             setMessage(res.data)
         } catch (error) {
             setError(error.response.data)

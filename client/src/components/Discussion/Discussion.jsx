@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Disc from './Disc'
 import Search from '@mui/icons-material/Search'
+import { API } from '../../config';
 
 const Discussion = () => {
 
@@ -27,7 +28,7 @@ const Discussion = () => {
   useEffect(() => {
     const fetchDiscussions = async () => {
       try {
-        const response = await axios.post(`/review/discussion?page=${currentPage}`);
+        const response = await axios.post(`${API}review/discussion?page=${currentPage}`);
         dispatch(discSuccess([...response.data.discussions]));
         setTotalPages(response.data.totalPages);
 
@@ -49,7 +50,7 @@ const Discussion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post(
-      "/review/add",
+      API+"review/add",
       { topic },
       {
         headers: {
@@ -59,7 +60,7 @@ const Discussion = () => {
     );
     setOpen(!open)
 
-    const res = await axios.post("/review/getdisc")
+    const res = await axios.post(API+"review/getdisc")
     dispatch(discSuccess(res.data))
   };
 
@@ -73,7 +74,7 @@ const Discussion = () => {
   const searchHandle = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.get(`/review/disc/search?search=${query}`)
+      const res = await axios.get(`${API}review/disc/search?search=${query}`)
       setResult(res.data)
       dispatch(discSuccess(res.data))
     } catch (error) {

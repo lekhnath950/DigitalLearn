@@ -7,6 +7,7 @@ import './Category.css'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { API } from '../../config'
 
 const Category = () => {
   const [post, setPost] = useState([])
@@ -19,7 +20,7 @@ const Category = () => {
 
 useEffect(()=> {
   const fetchh = async () => {
-    const res = await axios.get('/posts/tag')
+    const res = await axios.get(API+'posts/tag')
     setTags(res.data)
   }
   fetchh();
@@ -27,7 +28,7 @@ useEffect(()=> {
 
 useEffect(() => {
   const fetchh = async () => {
-    const res = await axios.get("/posts/trend")
+    const res = await axios.get(API+"posts/trend")
     setPost(res.data)
   }
   fetchh();

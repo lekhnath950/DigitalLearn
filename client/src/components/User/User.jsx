@@ -9,6 +9,7 @@ import './User.css'; // Import the CSS file
 import { Tooltip } from '@mui/material';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import { API } from '../../config';
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../../redux/userSlice';
 
@@ -21,7 +22,7 @@ const User = () => {
 
   useEffect(() => {
     const fetchh = async () => {
-      const res = await axios.get(`/users/finds/${path}`);
+      const res = await axios.get(`${API}users/finds/${path}`);
       console.log(res.data);
       setInfo(res.data);
     };

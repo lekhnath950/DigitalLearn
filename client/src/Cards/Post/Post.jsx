@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { API } from '../../config'
 
 
 const Post = ({ post }) => {
@@ -27,7 +28,7 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         const fetchChannel = async () => {
-            const res = await axios.get(`/posts/find/${post._id}`)
+            const res = await axios.get(`${API}posts/find/${post._id}`)
             setChannel(res.data)
         }
         fetchChannel() 
@@ -42,7 +43,7 @@ const Post = ({ post }) => {
                 title: editTitle,
                 desc: editDesc
             }
-           await axios.put(`/posts/${pid}`,updatePost)
+           await axios.put(`${API}posts/${pid}`,updatePost)
            setOpen(false)
            setEditTitle('')
            setEditDesc('')
@@ -60,7 +61,7 @@ const Post = ({ post }) => {
 
     const deleteHandler = async (pid) => {
         await window.confirm("want to delete?")
-        await axios.delete(`/posts/${pid}`)
+        await axios.delete(`${API}posts/${pid}`)
     }
 
     const [isOpen, setIsOpen] = useState(false);

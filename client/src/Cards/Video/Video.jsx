@@ -11,6 +11,7 @@ import moment from 'moment';
 import Loader from '../Loader/Loader';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { API } from '../../config';
 
 
 const Video = () => {
@@ -36,8 +37,8 @@ const Video = () => {
     const fetchData = async () => {
       dispatch(postRequest())
       try {
-        const videoRes = await axios.get(`/posts/find/${path}`) //to get video from the postid
-        const channelRes = await axios.get(`/users/finds/${videoRes.data.userId}`)  //to get the channel data
+        const videoRes = await axios.get(`${API}posts/find/${path}`) //to get video from the postid
+        const channelRes = await axios.get(`${API}users/finds/${videoRes.data.userId}`)  //to get the channel data
         setChannel(channelRes.data)
         dispatch(postSuccess(videoRes.data))
       } catch (error) {
@@ -50,21 +51,21 @@ const Video = () => {
   const [liked,setLiked] = useState(false)
 
   const likeHandle1 = async () => {
-    await axios.put(`/users/love/${currentPost._id}`)
+    await axios.put(`${API}users/love/${currentPost._id}`)
   }
 
     const likeHandle = async () => {
       dispatch(likeRequest());
       try {
-        await axios.put(`/users/love/${currentPost._id}`);
+        await axios.put(`${API}users/love/${currentPost._id}`);
         if (liked) {
           setLiked(false);
         } else {
           setLiked(true);
         }
         dispatch(likeSuccess('Post Liked'));
-        const videoRes = await axios.get(`/posts/find/${path}`) //to get video from the postid
-        const channelRes = await axios.get(`/users/finds/${videoRes.data.userId}`)  //to get the channel data
+        const videoRes = await axios.get(`${API}posts/find/${path}`) //to get video from the postid
+        const channelRes = await axios.get(`${API}users/finds/${videoRes.data.userId}`)  //to get the channel data
         setChannel(channelRes.data)
         dispatch(postSuccess(videoRes.data))
       } catch (error) {

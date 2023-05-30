@@ -4,6 +4,7 @@ import './Admin.css'
 import Navbar from '../Navbar/Navbar';
 import LeftNav from '../Navbar/LeftNav';
 import { Link } from 'react-router-dom';
+import { API } from '../../config';
 
 const Admin = () => {
 	const [allUser, setAllUser] = useState([]);
@@ -14,7 +15,7 @@ const Admin = () => {
 
 	useEffect(() => {
 		const fetchAllUsers = async () => {
-			const res = await axios.get('/users/allusers');
+			const res = await axios.get(API+'users/allusers');
 			console.log(res.data)
 			setAllUser(res.data);
 		};
@@ -30,7 +31,7 @@ const Admin = () => {
 	};
 
 	const handleSave = async () => {
-		const res = await axios.post(`/users/find/${editUserId}`, {
+		const res = await axios.post(`${API}users/find/${editUserId}`, {
 			name: editName,
 			email: editEmail,
 			role: editRole,
@@ -60,7 +61,7 @@ const Admin = () => {
 		const confirmed = window.confirm("Are you sure you want to delete?");
 		if (confirmed) {
 		  try {
-			await axios.delete(`/users/${delId}`);
+			await axios.delete(`${API}users/${delId}`);
 			alert("Deleted");
 		  } catch (error) {
 			console.error("Error occurred during deletion:", error);

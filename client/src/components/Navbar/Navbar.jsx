@@ -13,6 +13,7 @@ import Post from '../../Cards/Post/Post'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LockIcon from '@mui/icons-material/Lock';
 import ErrorIcon from '@mui/icons-material/Error';
+import { API } from '../../config';
 
 
 function Navbar() {
@@ -38,7 +39,7 @@ function Navbar() {
     e.preventDefault()
     dispatch(loginRequest())
     try {
-      const res = await axios.post("/auth/login", { email, password })
+      const res = await axios.post(API+"auth/login", { email, password })
       setDialog(false)
       dispatch(loginSuccess({ user: res.data, message: res.data.message }))
       navi("/")
@@ -64,7 +65,7 @@ function Navbar() {
 
   const logoutt = async () => {
     await navi("/")
-    await axios.post("/auth/logout")
+    await axios.post(API+"auth/logout")
     dispatch(logout())
   }
 

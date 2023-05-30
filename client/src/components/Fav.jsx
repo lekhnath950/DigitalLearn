@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Post from '../Cards/Post/Post';
 import Navbar from './Navbar/Navbar';
 import LeftNav from './Navbar/LeftNav';
+import { API } from '../config';
 
 function Fav(props) {
   const [likes, setLikes] = useState([]);
@@ -12,7 +13,7 @@ function Fav(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`/users/likes/${path}`);
+        const response = await axios.get(`${API}users/likes/${path}`);
         setLikes(response.data);
       } catch (error) {
         console.error(error);
