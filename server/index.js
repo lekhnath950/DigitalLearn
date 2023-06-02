@@ -21,6 +21,10 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors());
 
+app.get("/",(req,res)=> {
+res.json("Welcome to DigitalLearn")
+})
+
 app.use("/api/auth", authRoute)
 app.use("/api/users", userRoute)
 app.use("/api/posts", postRoute)
