@@ -5,7 +5,6 @@ import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
 import './Home.css'
 import {Pagination} from '@mui/material'
-import { API } from '../../config'
 
 
 const Home = () => {
@@ -18,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchh = async () => {
-      const res = await axios.get(API+"posts/random")
+      const res = await axios.get("/posts/random")
       setPost(res.data)
     }
 

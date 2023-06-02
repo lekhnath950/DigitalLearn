@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import Navbar from '../Navbar/Navbar'
 import LeftNav from '../Navbar/LeftNav'
 import Post from '../../Cards/Post/Post'
-import { API } from '../../config'
 
 const Tag = () => {
 
@@ -13,7 +12,7 @@ const Tag = () => {
 
     useEffect(()=> {
         const fetchh = async () => {
-            const res = await axios.get(`${API}posts/tags?tags=${tag}`)
+            const res = await axios.get(`/posts/tags?tags=${tag}`)
             setPostT(res.data)
         }
         fetchh();

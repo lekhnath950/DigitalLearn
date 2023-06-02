@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Tooltip } from '@mui/material';
-import { API } from '../../config';
 
 const Disc = ({ disc, reply }) => {
 
@@ -35,9 +34,9 @@ const Disc = ({ disc, reply }) => {
   const deleteHandler = async (id) => {
     try {
       await window.confirm("Want to delete?")
-      await axios.delete(`${API}review/Disc/${id}`)
+      await axios.delete(`/review/Disc/${id}`)
 
-      const res1 = await axios.post(API+"review/getdisc")
+      const res1 = await axios.post("/review/getdisc")
       dispatch(discSuccess(res1.data));
     } catch (error) {
       dispatch(discFailure(error))
@@ -49,10 +48,10 @@ const Disc = ({ disc, reply }) => {
     try {
      const confirmed = window.confirm("want to delete?")
       if (confirmed) {
-        const res = await axios.delete(`${API}review/${id}/replies/${replyid}`)
+        const res = await axios.delete(`/review/${id}/replies/${replyid}`)
         setMsg(res.data)
         setMsgOpen(true)
-        const res1 = await axios.post(API+"/review/getdisc")
+        const res1 = await axios.post("/review/getdisc")
         dispatch(discSuccess(res1.data));
       }
     } catch (error) {
@@ -63,7 +62,7 @@ const Disc = ({ disc, reply }) => {
   const handleReply = async (e, id) => {
     e.preventDefault();
     await axios.post(
-      `${API}review/addReply/${id}`,
+      `/review/addReply/${id}`,
       { rep: replyInputs[id] },
       {
         headers: {
@@ -72,7 +71,7 @@ const Disc = ({ disc, reply }) => {
       }
     );
 
-    const res = await axios.post(API+"review/getdisc")
+    const res = await axios.post("/review/getdisc")
     dispatch(discSuccess(res.data));
     console.log(res.data)
 

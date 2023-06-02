@@ -7,7 +7,6 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } f
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
 import LeftNav from '../Navbar/LeftNav';
-import { API } from '../../config';
 
 
 const Upload = () => {
@@ -91,7 +90,7 @@ const Upload = () => {
             imgUrl: inputs.imgUrl,
             videoUrl: inputs.videoUrl
         }
-        const res = await axios.post(API+"posts", data)
+        const res = await axios.post("/posts", data)
         res.status === 200 && console.log(res.data)
         setDialog(false);
         console.log("inputs")

@@ -7,7 +7,6 @@ import axios from 'axios'
 import Post from '../../Cards/Post/Post'
 import { logout } from '../../redux/userSlice'
 import { useNavigate } from 'react-router-dom'
-import { API } from '../../config'
 
 const Profile = () => {
   const { user } = useSelector(state => state.user)
@@ -17,7 +16,7 @@ const Profile = () => {
   let id = user._id;
   useEffect(() => {
     const fetchh = async () => {
-      const res = await axios.get(`${API}posts/profile/${id}`)
+      const res = await axios.get(`/posts/profile/${id}`)
       setProf(res.data)
     }
     fetchh()
@@ -30,7 +29,7 @@ const Profile = () => {
     const confirmed = window.confirm("want to delete your account?")
     if (confirmed) {
       try {
-        await axios.delete(`${API}users/${delId}`)
+        await axios.delete(`/users/${delId}`)
         dispatch(logout())
         alert("Deleted")
         navi("/")
